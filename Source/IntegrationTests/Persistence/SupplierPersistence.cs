@@ -37,7 +37,7 @@ namespace IntegrationTests.Persistence
         }
 
         [Test]
-        public void Action_Scenario_Behaviour()
+        public void AddNewSupplier_WhenRetrievedFromRepository_ShouldReturnSavedSupplier()
         {
             // Arrange
             var supplier = new Supplier {Name = "test"};

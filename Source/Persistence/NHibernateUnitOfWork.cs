@@ -9,6 +9,7 @@ namespace Persistence
     public class NHibernateUnitOfWork : IUnitOfWork
     {
         private readonly ISession session;
+        private readonly bool sessionWasProvided;
         private readonly ITransaction transaction;
 
         public NHibernateUnitOfWork(ISessionFactory sessionFactory)
@@ -17,6 +18,14 @@ namespace Persistence
 
             session = sessionFactory.OpenSession();
             transaction = session.BeginTransaction();
+        }
+
+        public NHibernateUnitOfWork(ISession session)
+        {
+            if (session == null) throw new ArgumentNullException("session");
+            this.session = session;
+            transaction = session.BeginTransaction();
+            sessionWasProvided = true;
         }
 
         public TEntity GetById<TEntity>(int id) where TEntity : class
@@ -45,7 +54,10 @@ namespace Persistence
             if (transaction.IsActive)
                 transaction.Rollback();
 
-            session.Dispose();
+            if (sessionWasProvided)
+            {
+                session.Dispose();
+            }
         }
     }
 }
