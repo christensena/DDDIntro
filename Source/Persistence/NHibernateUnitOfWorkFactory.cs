@@ -16,7 +16,7 @@ namespace Persistence
 
         public IUnitOfWork BeginUnitOfWork()
         {
-            return new NHibernateUnitOfWork(sessionFactory.OpenSession());
+            return new NHibernateUnitOfWork(sessionFactory);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using DDDIntro.Core;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace Persistence
 {
@@ -22,8 +23,7 @@ namespace Persistence
 
         public IQueryable<TEntity> FindAll()
         {
-            //return session.;
-            return null;
+            return session.Query<TEntity>();
         }
 
         public void Add(TEntity entity)

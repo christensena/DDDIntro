@@ -2,6 +2,8 @@
 {
     public class Address
     {
+        public virtual int Id { get; private set; }
+
         public virtual string Line1 { get; private set; }
 
         public virtual string Line2 { get; private set; }
@@ -12,7 +14,7 @@
 
         public virtual string Country { get; private set; }
 
-        private Address()
+        protected Address()
         {
             
         }
