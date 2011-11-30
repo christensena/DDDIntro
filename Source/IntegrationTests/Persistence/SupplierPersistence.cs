@@ -41,7 +41,11 @@ namespace IntegrationTests.Persistence
         public void AddNewSupplier_WhenRetrievedFromRepository_ShouldReturnSavedSupplier()
         {
             // Arrange
-            var supplier = new Supplier {Name = "test"};
+            var supplier = new Supplier
+                               {
+                                   Name = "test",
+                                   Address = new Address("123 Anystreet St", "", "", "Christchurch", "New Zealand")
+                               };
 
             // Act
             using (var unitOfWork = unitOfWorkFactory.BeginUnitOfWork())
@@ -52,7 +56,9 @@ namespace IntegrationTests.Persistence
             }
 
             // Assert
-            supplierRepository.FindAll().Where(s => s.Name == supplier.Name).Should().NotBeEmpty();
+            var retrievedSupplier = supplierRepository.FindAll().Where(s => s.Name == supplier.Name).FirstOrDefault();
+            retrievedSupplier.Should().NotBeNull();
+            retrievedSupplier.Address.ShouldHave().AllProperties().EqualTo(supplier.Address);
         }
     }
 }
