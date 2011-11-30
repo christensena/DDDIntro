@@ -6,6 +6,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using Persistence.MappingConventions;
+using Persistence.MappingOverrides;
 
 namespace Persistence
 {
@@ -13,12 +15,14 @@ namespace Persistence
     {
         private const string SqlLiteDbFilename = "tmpdb.db";
 
-        public static Configuration GetSqLiteInMemoryDatabaseConfiguration()
+        public static Configuration GetTempDatabaseConfiguration()
         {
             return Fluently.Configure()
                 .Database(SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename))
                 //.Database(SQLiteConfiguration.Standard.InMemory())
-                .Mappings(m => m.AutoMappings.Add(AutoMap.AssemblyOf<Supplier>))
+                .Mappings(m => m.AutoMappings.Add(
+                    AutoMap.AssemblyOf<Supplier>(new DefaultMappingConfiguration())
+                        .UseOverridesFromAssemblyOf<PurchaseOrderMappingOverride>()))
                 .ExposeConfiguration(BuildDatabase)
                 .BuildConfiguration();
         }

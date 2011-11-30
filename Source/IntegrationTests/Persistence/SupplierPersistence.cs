@@ -1,4 +1,5 @@
 using System.Linq;
+using DDDIntro.Core;
 using DDDIntro.Domain;
 using FluentAssertions;
 using NHibernate;
@@ -10,15 +11,15 @@ namespace IntegrationTests.Persistence
     [TestFixture]
     public class SupplierPersistence
     {
-        private NHibernateUnitOfWorkFactory unitOfWorkFactory;
+        private IUnitOfWorkFactory unitOfWorkFactory;
         private ISessionFactory sessionFactory;
-        private NHibernateRepository<Supplier> supplierRepository;
+        private IRepository<Supplier> supplierRepository;
         private ISession repositorySession;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
-            var databaseConfiguration = NHibernateConfigurationProvider.GetSqLiteInMemoryDatabaseConfiguration();
+            var databaseConfiguration = NHibernateConfigurationProvider.GetTempDatabaseConfiguration();
             sessionFactory = new SessionFactoryProvider(databaseConfiguration).GetSessionFactory();
             unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
         }

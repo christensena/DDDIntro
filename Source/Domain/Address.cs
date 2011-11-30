@@ -1,9 +1,8 @@
 ﻿namespace DDDIntro.Domain
 {
+    // this is mapped as a component
     public class Address
     {
-        public virtual int Id { get; private set; }
-
         public virtual string Line1 { get; private set; }
 
         public virtual string Line2 { get; private set; }
