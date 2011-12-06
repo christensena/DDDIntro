@@ -33,9 +33,10 @@ namespace DDDIntro.Domain
             orderLines = new List<PurchaseOrderLine>();
         }
 
-        public virtual PurchaseOrderLine AddOrderLine()
+        public virtual PurchaseOrderLine AddOrderLine(Product product)
         {
-            var orderLine = new PurchaseOrderLine(this);
+            if (product == null) throw new ArgumentNullException("product");
+            var orderLine = new PurchaseOrderLine(this, product);
             orderLines.Add(orderLine);
             return orderLine;
         }

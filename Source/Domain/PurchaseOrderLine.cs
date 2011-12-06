@@ -8,7 +8,7 @@ namespace DDDIntro.Domain
 
         public virtual PurchaseOrder Order { get; private set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Product Product { get; private set; } // if we change the product, we might as well replace the whole orderline? style choice perhaps
 
         public virtual int Quantity { get; set; }
 
@@ -18,17 +18,17 @@ namespace DDDIntro.Domain
         }
 
         // for the Order.AddOrderLine()
-        internal PurchaseOrderLine(PurchaseOrder purchaseOrder)
+        internal PurchaseOrderLine(PurchaseOrder purchaseOrder, Product product)
         {
             if (purchaseOrder == null) throw new ArgumentNullException("purchaseOrder");
+            if (product == null) throw new ArgumentNullException("product");
             Order = purchaseOrder;
+            Product = product;
         }
 
         public virtual decimal GetLineTotal()
         {
-            if (Product == null)
-                return 0m; // what is best to do here is decided by domain modelling. what should this value be?
-
+            // because we made Product mandatory through the constructor we don't need to check for null
             return Quantity*Product.SellPrice;
         }
 

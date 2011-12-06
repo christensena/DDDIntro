@@ -43,12 +43,14 @@ namespace IntegrationTests.Persistence
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
                 // Arrange
-                var order = new PurchaseOrder(uow.GetById<Supplier>(supplier.Id));
-                var orderLine1 = order.AddOrderLine();
-                orderLine1.Product = uow.GetById<Product>(products[0].Id); // note we can't just use the same instances
+                var orderSupplier = uow.GetById<Supplier>(supplier.Id); // need to re-get as different session. NH will cache so no cost
+                var order = new PurchaseOrder(orderSupplier);
+                
+                var orderLine1 = order.AddOrderLine(uow.GetById<Product>(products[0].Id));
+                orderLine1.Quantity = 2;
 
-                var orderLine2 = order.AddOrderLine();
-                orderLine2.Product = uow.GetById<Product>(products[1].Id);
+                var orderLine2 = order.AddOrderLine(uow.GetById<Product>(products[1].Id));
+                orderLine2.Quantity = 1;
 
                 // Act
                 uow.Add(order); // by setting up cascade update in NH mappings, I don't need to add orderlines explicitly
