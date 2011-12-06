@@ -13,7 +13,7 @@
 
         // this simple implementation of Equals is based on Id always being populated
         // if we have id assigned by the database then we only have one if the object is persisted
-        public bool Equals(Supplier other)
+        public virtual bool Equals(Supplier other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;

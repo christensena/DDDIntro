@@ -1,42 +1,13 @@
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain;
 using FluentAssertions;
-using NHibernate;
 using NUnit.Framework;
-using Persistence;
 
 namespace IntegrationTests.Persistence
 {
     [TestFixture]
-    public class SupplierPersistence
+    public class SupplierPersistence : PersistenceTestSuiteBase
     {
-        private IUnitOfWorkFactory unitOfWorkFactory;
-        private ISessionFactory sessionFactory;
-        private IRepository<Supplier> supplierRepository;
-        private ISession repositorySession;
-
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
-        {
-            var databaseConfiguration = NHibernateConfigurationProvider.GetTempDatabaseConfiguration();
-            sessionFactory = new SessionFactoryProvider(databaseConfiguration).GetSessionFactory();
-            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
-            repositorySession = sessionFactory.OpenSession();
-            supplierRepository = new NHibernateRepository<Supplier>(repositorySession);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            repositorySession.Dispose();
-        }
-
         [Test]
         public void AddNewSupplier_WhenRetrievedFromRepository_ShouldReturnSavedSupplier()
         {
@@ -48,7 +19,7 @@ namespace IntegrationTests.Persistence
                                };
 
             // Act
-            using (var unitOfWork = unitOfWorkFactory.BeginUnitOfWork())
+            using (var unitOfWork = UnitOfWorkFactory.BeginUnitOfWork())
             {
                 unitOfWork.Add(supplier);
 
@@ -56,8 +27,9 @@ namespace IntegrationTests.Persistence
             }
 
             // Assert
-            var retrievedSupplier = supplierRepository.FindAll().Where(s => s.Name == supplier.Name).FirstOrDefault();
+            var retrievedSupplier = GetRepository<Supplier>().FindAll().Where(s => s.Name == supplier.Name).FirstOrDefault();
             retrievedSupplier.Should().NotBeNull();
+            retrievedSupplier.Id.Should().NotBe(0);
             retrievedSupplier.Address.ShouldHave().AllProperties().EqualTo(supplier.Address);
         }
     }

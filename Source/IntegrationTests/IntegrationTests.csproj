@@ -107,6 +107,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistence\PurchaseOrderPersistence.cs" />
+    <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />
     <Compile Include="Persistence\SupplierPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
