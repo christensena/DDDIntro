@@ -4,7 +4,7 @@ namespace DDDIntro.Domain
 {
     public class PurchaseOrderLine
     {
-        public virtual int Id { get; private set; }
+        private int id; // no need to expose a getter as this is not an aggregate root. needed for identity only which we expose via Equals()
 
         public virtual PurchaseOrder Order { get; private set; }
 
@@ -36,7 +36,7 @@ namespace DDDIntro.Domain
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return other.Id == Id;
+            return other.id == id;
         }
 
         public override bool Equals(object obj)
@@ -49,7 +49,7 @@ namespace DDDIntro.Domain
 
         public override int GetHashCode()
         {
-            return Id;
+            return id;
         }
     }
 }
