@@ -14,12 +14,4 @@ namespace Persistence.MappingOverrides
                 .Cascade.AllDeleteOrphan(); // with Cascade.All I include saves which means I don't need to add orderlines to a NH session to get them saved. just save the order
         }
     }
-
-    public class PurchaseOrderLineMappingOverride : IAutoMappingOverride<PurchaseOrderLine>
-    {
-        public void Override(AutoMapping<PurchaseOrderLine> mapping)
-        {
-            mapping.HasOne(x => x.Order);
-        }
-    }
 }

@@ -1,3 +1,4 @@
+using System;
 using DDDIntro.Domain;
 using FluentNHibernate.Automapping;
 

@@ -22,7 +22,8 @@ namespace Persistence
                 //.Database(SQLiteConfiguration.Standard.InMemory())
                 .Mappings(m => m.AutoMappings.Add(
                     AutoMap.AssemblyOf<Supplier>(new DefaultMappingConfiguration())
-                        .UseOverridesFromAssemblyOf<PurchaseOrderMappingOverride>()))
+                    .Conventions.AddFromAssemblyOf<IdGenerationConvention>()
+                     .UseOverridesFromAssemblyOf<PurchaseOrderMappingOverride>()))
                 .ExposeConfiguration(BuildDatabase)
                 .BuildConfiguration();
         }
