@@ -18,7 +18,7 @@ namespace Persistence
         public static Configuration GetTempDatabaseConfiguration()
         {
             return Fluently.Configure()
-                .Database(SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename))
+                .Database(SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename).ShowSql())
                 //.Database(SQLiteConfiguration.Standard.InMemory())
                 .Mappings(m => m.AutoMappings.Add(
                     AutoMap.AssemblyOf<Supplier>(new DefaultMappingConfiguration())

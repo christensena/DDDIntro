@@ -45,5 +45,19 @@ namespace DDDIntro.IntegrationTests.Services
             purchaseOrder.OrderNumber.Should().NotBeNullOrEmpty();
             purchaseOrder.IsFinalised.Should().BeFalse();
         }
+
+        [Test]
+        public void GetNewPurchaseOrder_SecondEntryAssignsIncrementedOrderNumber()
+        {
+            // Arrange
+            var firstOrder = service.GetNewPurchaseOrder(supplierId);
+            var firstOrderNumber = int.Parse(firstOrder.OrderNumber);
+
+            // Act
+            var purchaseOrder = service.GetNewPurchaseOrder(supplierId);
+
+            // Assert
+            int.Parse(purchaseOrder.OrderNumber).Should().Be(firstOrderNumber + 1);
+        }
     }
 }
