@@ -8,11 +8,13 @@ namespace DDDIntro.Domain
     {
         private IList<PurchaseOrderLine> orderLines; // List makes sense here as order is important.
 
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; private set; } // immutable
 
-        public virtual Supplier Supplier { get; private set; }
+        public virtual string OrderNumber { get; private set; } // immutable
 
-        public virtual IEnumerable<PurchaseOrderLine> OrderLines
+        public virtual Supplier Supplier { get; private set; } // immutable
+
+        public virtual IEnumerable<PurchaseOrderLine> OrderLines // read only; modify via controlled methods below
         {
             get
             {
@@ -20,14 +22,23 @@ namespace DDDIntro.Domain
             }
         }
 
+        // this is a mutable property but controlled through methods
+        public virtual bool IsFinalised
+        {
+            get;
+            private set;
+        }
+
         // for NH
         protected PurchaseOrder()
         {
         }
 
-        public PurchaseOrder(Supplier supplier)
+        internal PurchaseOrder(string orderNumber, Supplier supplier)
         {
+            if (string.IsNullOrEmpty(orderNumber)) throw new ArgumentNullException("orderNumber");
             if (supplier == null) throw new ArgumentNullException("supplier");
+            OrderNumber = orderNumber;
             Supplier = supplier;
 
             orderLines = new List<PurchaseOrderLine>();
@@ -36,6 +47,9 @@ namespace DDDIntro.Domain
         public virtual PurchaseOrderLine AddOrderLine(Product product)
         {
             if (product == null) throw new ArgumentNullException("product");
+
+            VerifyOrderCanBeModified();
+
             var orderLine = new PurchaseOrderLine(this, product);
             orderLines.Add(orderLine);
             return orderLine;
@@ -50,6 +64,8 @@ namespace DDDIntro.Domain
                 throw new InvalidOperationException("Orderline does not exist on this order");
             }
 
+            VerifyOrderCanBeModified();
+
             orderLines.Remove(purchaseOrderLine);
         }
 
@@ -58,7 +74,21 @@ namespace DDDIntro.Domain
             return orderLines.Sum(orderLine => orderLine.GetLineTotal());
         }
 
-        public virtual bool Equals(PurchaseOrderLine other)
+        public virtual void Finalise()
+        {
+            if (IsFinalised)
+            {
+                throw new InvalidOperationException("Order has already been finalised");
+            }
+            
+            // we would do any invariant checking here
+            // to decide if the object is ready to be finalised
+            // (if we had any we'd best expose an IsReadyToFinalise() method
+
+            IsFinalised = true;
+        }
+
+        public virtual bool Equals(PurchaseOrder other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -70,12 +100,20 @@ namespace DDDIntro.Domain
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != typeof(PurchaseOrderLine)) return false;
-            return Equals((PurchaseOrderLine)obj);
+            return Equals(obj);
         }
 
         public override int GetHashCode()
         {
             return Id;
+        }
+
+        private void VerifyOrderCanBeModified()
+        {
+            if (IsFinalised)
+            {
+                throw new InvalidOperationException("Finalised orders cannot be modified");
+            }
         }
     }
 }
