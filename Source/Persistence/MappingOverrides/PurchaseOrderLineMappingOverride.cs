@@ -8,6 +8,7 @@ namespace Persistence.MappingOverrides
     {
         public void Override(AutoMapping<PurchaseOrderLine> mapping)
         {
+            mapping.Id().Access.BackingField();
             mapping.HasOne(x => x.Order);
         }
     }
