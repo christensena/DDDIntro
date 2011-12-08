@@ -44,7 +44,7 @@ namespace IntegrationTests.Persistence
             {
                 // Arrange
                 var orderSupplier = uow.GetById<Supplier>(supplier.Id); // need to re-get as different session. NH will cache so no cost
-                var order = new PurchaseOrder(orderSupplier);
+                var order = new PurchaseOrder("0001", orderSupplier);
                 
                 var orderLine1 = order.AddOrderLine(uow.GetById<Product>(products[0].Id));
                 orderLine1.Quantity = 2;

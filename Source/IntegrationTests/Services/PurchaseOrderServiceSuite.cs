@@ -24,6 +24,8 @@ namespace IntegrationTests.Services
 
                 uow.Add(supplier);
 
+                uow.Complete();
+
                 supplierId = supplier.Id;
             }
         }
@@ -35,7 +37,7 @@ namespace IntegrationTests.Services
         }
 
         [Test]
-        public void Action_Scenario_Behaviour()
+        public void GetNewPurchaseOrder_CreatesUnfinalisedPurchaseOrderWithOrderNumber()
         {
             // Arrange
 
