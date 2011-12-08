@@ -3,7 +3,7 @@ using NHibernate;
 using NUnit.Framework;
 using Persistence;
 
-namespace IntegrationTests.Services
+namespace DDDIntro.IntegrationTests.Services
 {
     public class ServiceTestSuiteBase
     {

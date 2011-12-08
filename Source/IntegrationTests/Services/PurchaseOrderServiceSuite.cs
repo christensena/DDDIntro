@@ -1,12 +1,9 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace IntegrationTests.Services
+namespace DDDIntro.IntegrationTests.Services
 {
     [TestFixture]
     public class PurchaseOrderServiceSuite : ServiceTestSuiteBase

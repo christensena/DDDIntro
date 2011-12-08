@@ -1,10 +1,9 @@
 ﻿using DDDIntro.Core;
-using DDDIntro.Domain;
 using NHibernate;
 using NUnit.Framework;
 using Persistence;
 
-namespace IntegrationTests.Persistence
+namespace DDDIntro.IntegrationTests.Persistence
 {
     public abstract class PersistenceTestSuiteBase
     {

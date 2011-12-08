@@ -2,7 +2,7 @@ using DDDIntro.Domain;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace IntegrationTests.Persistence
+namespace DDDIntro.IntegrationTests.Persistence
 {
     [TestFixture]
     public class PurchaseOrderPersistence : PersistenceTestSuiteBase
