@@ -55,6 +55,20 @@ namespace DDDIntro.Domain
             return orderLine;
         }
 
+        public virtual PurchaseOrderLine InsertOrderLineAfter(PurchaseOrderLine orderLineToInsertAfter, Product product)
+        {
+            if (product == null) throw new ArgumentNullException("product");
+
+            VerifyOrderCanBeModified();
+
+            var index = orderLines.IndexOf(orderLineToInsertAfter);
+            if (index < 0) throw new InvalidOperationException("Order line not found on order with product ID: " + orderLineToInsertAfter.Product.Id);
+
+            var orderLine = new PurchaseOrderLine(this, product);
+            orderLines.Insert(index+1, orderLine);
+            return orderLine;
+        }
+
         public virtual void RemoveOrderLine(PurchaseOrderLine purchaseOrderLine)
         {
             if (purchaseOrderLine == null) throw new ArgumentNullException("purchaseOrderLine");
