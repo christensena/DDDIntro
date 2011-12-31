@@ -10,6 +10,20 @@ namespace DDDIntro.UnitTests.Domain
         Because of = () => _order.AddOrderLine(_product1);
 
         It should_have_one_orderline = () => _order.OrderLines.Count().ShouldEqual(1);
+
+        It should_have_default_quantity_of_one = () => _order.OrderLines.First().Quantity.ShouldEqual(1);
+    }
+
+    [Subject(typeof(PurchaseOrder), "Adding order line where same product already exists on order")]
+    public class PurchaseOrderLine_AddOrderLineExistingProduct : PurchaseOrderLinesListSpecs
+    {
+        Establish context = () => _order.AddOrderLine(_product1);
+
+        Because of = () => _order.AddOrderLine(_product1);
+
+        It should_have_one_orderline = () => _order.OrderLines.Count().ShouldEqual(1);
+
+        It should_have_incremented_quantity = () => _order.OrderLines.First().Quantity.ShouldEqual(2);
     }
 
     [Subject(typeof(PurchaseOrder), "Removing order lines")]

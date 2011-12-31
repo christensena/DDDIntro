@@ -14,7 +14,6 @@ namespace DDDIntro.IntegrationTests.Persistence
         private int lastOrderNumber = 0;
 
         private Supplier supplier;
-        private Product[] products;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
@@ -26,19 +25,9 @@ namespace DDDIntro.IntegrationTests.Persistence
 
                 uow.Add(supplier);
 
-                products = new[]
-                               {
-                                   new Product {Title = "Widget 1", SellPrice = 12.50m},
-                                   new Product {Title = "Widget 2", SellPrice = 10.99m}
-                               };
-
-                foreach (var product in products)
-                {
-                    uow.Add(product);
-                }
-
                 uow.Complete();
             }
+            
         }
 
         [Test]
@@ -52,10 +41,10 @@ namespace DDDIntro.IntegrationTests.Persistence
                 var orderSupplier = uow.GetById<Supplier>(supplier.Id); // need to re-get as different session. NH will cache so no cost
                 var order = new PurchaseOrder(GetNextOrderNumber(), orderSupplier);
                 
-                var orderLine1 = order.AddOrderLine(uow.GetById<Product>(products[0].Id));
+                var orderLine1 = order.AddOrderLine(CreateAndPersistRandomProduct(uow));
                 orderLine1.Quantity = 2;
 
-                var orderLine2 = order.AddOrderLine(uow.GetById<Product>(products[1].Id));
+                var orderLine2 = order.AddOrderLine(CreateAndPersistRandomProduct(uow));
                 orderLine2.Quantity = 1;
 
                 // Act
@@ -110,7 +99,7 @@ namespace DDDIntro.IntegrationTests.Persistence
 
                 var orderLine = originalOrder.InsertOrderLineAfter(
                     originalOrder.OrderLines.ElementAt(1), 
-                    uow.GetById<Product>(products[random.Next(products.Length - 1)].Id));
+                    CreateAndPersistRandomProduct(uow));
                 orderLine.Quantity = random.Next(5);
                 
                 uow.Complete();
@@ -144,11 +133,20 @@ namespace DDDIntro.IntegrationTests.Persistence
             }            
         }
 
-        private PurchaseOrderLine AddRandomOrderLineToOrder(IAggregateRepository repository, PurchaseOrder order)
+        private PurchaseOrderLine AddRandomOrderLineToOrder(IUnitOfWork uow, PurchaseOrder order)
         {
-            var orderLine = order.AddOrderLine(repository.GetById<Product>(products[random.Next(products.Length-1)].Id));
+            var orderLine = order.AddOrderLine(CreateAndPersistRandomProduct(uow));
             orderLine.Quantity = random.Next(5);
             return orderLine;
+        }
+
+        private Product CreateAndPersistRandomProduct(IUnitOfWork uow)
+        {
+                var product = new Product { Title = "Widget 1", SellPrice = 12.50m };
+
+                uow.Add(product);
+
+            return product;
         }
 
         private string GetNextOrderNumber()

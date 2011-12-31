@@ -50,9 +50,18 @@ namespace DDDIntro.Domain
 
             VerifyOrderCanBeModified();
 
-            var orderLine = new PurchaseOrderLine(this, product);
-            orderLines.Add(orderLine);
-            return orderLine;
+            var existingLineForSameProduct = orderLines.FirstOrDefault(x => x.Product.Equals(product));
+            if (existingLineForSameProduct != null)
+            {
+                existingLineForSameProduct.Quantity += 1;
+                return existingLineForSameProduct;
+            }
+            else
+            {
+                var orderLine = new PurchaseOrderLine(this, product);
+                orderLines.Add(orderLine);
+                return orderLine;
+            }
         }
 
         public virtual PurchaseOrderLine InsertOrderLineAfter(PurchaseOrderLine orderLineToInsertAfter, Product product)

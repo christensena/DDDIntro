@@ -24,6 +24,7 @@ namespace DDDIntro.Domain
             if (product == null) throw new ArgumentNullException("product");
             Order = purchaseOrder;
             Product = product;
+            Quantity = 1;
         }
 
         public virtual decimal GetLineTotal()
