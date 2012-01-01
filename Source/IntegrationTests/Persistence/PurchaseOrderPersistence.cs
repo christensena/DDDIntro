@@ -33,31 +33,29 @@ namespace DDDIntro.IntegrationTests.Persistence
         [Test]
         public void SavingAnOrder_ShouldSaveItsOrderLines()
         {
-            int orderId;
+            PurchaseOrder originalOrder;
 
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
                 // Arrange
                 var orderSupplier = uow.GetById<Supplier>(supplier.Id); // need to re-get as different session. NH will cache so no cost
-                var order = new PurchaseOrder(GetNextOrderNumber(), orderSupplier);
+                originalOrder = new PurchaseOrder(GetNextOrderNumber(), orderSupplier);
                 
-                var orderLine1 = order.AddOrderLine(CreateAndPersistRandomProduct(uow));
+                var orderLine1 = originalOrder.AddOrderLine(CreateAndPersistRandomProduct(uow));
                 orderLine1.Quantity = 2;
 
-                var orderLine2 = order.AddOrderLine(CreateAndPersistRandomProduct(uow));
-                orderLine2.Quantity = 1;
+                var orderLine2 = originalOrder.AddOrderLine(CreateAndPersistRandomProduct(uow));
+                orderLine2.Quantity = 3;
 
                 // Act
-                uow.Add(order); // by setting up cascade update in NH mappings, I don't need to add orderlines explicitly
+                uow.Add(originalOrder); // by setting up cascade update in NH mappings, I don't need to add orderlines explicitly
                 // order is my aggregate root. order lines should not be accessed via the repository
 
                 uow.Complete();
-
-                orderId = order.Id;
             }
 
             // Assert
-            var retrievedOrder = GetRepository<PurchaseOrder>().GetById(orderId);
+            var retrievedOrder = GetRepository<PurchaseOrder>().GetById(originalOrder.Id);
             retrievedOrder.Should().NotBeNull();
             retrievedOrder.OrderLines.Should().HaveCount(2);
         }

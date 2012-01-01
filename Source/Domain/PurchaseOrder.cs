@@ -6,7 +6,7 @@ namespace DDDIntro.Domain
 {
     public class PurchaseOrder
     {
-        private IList<PurchaseOrderLine> orderLines; // List makes sense here as order is important.
+        private IList<PurchaseOrderLine> orderLines; // List makes sense here as order is important. NH will manage persistence of ordering (see mappings)
 
         public virtual int Id { get; private set; } // immutable
 
@@ -34,6 +34,7 @@ namespace DDDIntro.Domain
         {
         }
 
+        // internal as we want to force use of a domain service to create purchase orders
         internal PurchaseOrder(string orderNumber, Supplier supplier)
         {
             if (string.IsNullOrEmpty(orderNumber)) throw new ArgumentNullException("orderNumber");
