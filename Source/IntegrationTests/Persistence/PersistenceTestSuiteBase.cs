@@ -1,7 +1,7 @@
 ﻿using DDDIntro.Core;
+using DDDIntro.Persistence;
 using NHibernate;
 using NUnit.Framework;
-using Persistence;
 
 namespace DDDIntro.IntegrationTests.Persistence
 {

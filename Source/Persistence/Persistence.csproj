@@ -8,8 +8,8 @@
     <ProjectGuid>{CC822684-2088-480B-9497-C76965066F24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Persistence</RootNamespace>
-    <AssemblyName>Persistence</AssemblyName>
+    <RootNamespace>DDDIntro.Persistence</RootNamespace>
+    <AssemblyName>DDDIntro.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

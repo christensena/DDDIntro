@@ -4,7 +4,7 @@ using DDDIntro.Core;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace Persistence
+namespace DDDIntro.Persistence
 {
     public class NHibernateUnitOfWork : IUnitOfWork
     {

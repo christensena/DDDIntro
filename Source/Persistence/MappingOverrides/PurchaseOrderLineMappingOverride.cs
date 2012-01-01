@@ -2,7 +2,7 @@
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
-namespace Persistence.MappingOverrides
+namespace DDDIntro.Persistence.MappingOverrides
 {
     public class PurchaseOrderLineMappingOverride : IAutoMappingOverride<PurchaseOrderLine>
     {

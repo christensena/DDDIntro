@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using DDDIntro.Domain;
+using DDDIntro.Persistence.MappingConventions;
+using DDDIntro.Persistence.MappingOverrides;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Persistence.MappingConventions;
-using Persistence.MappingOverrides;
 
-namespace Persistence
+namespace DDDIntro.Persistence
 {
     public static class NHibernateConfigurationProvider
     {

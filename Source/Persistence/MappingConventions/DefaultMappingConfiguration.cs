@@ -2,7 +2,7 @@ using System;
 using DDDIntro.Domain;
 using FluentNHibernate.Automapping;
 
-namespace Persistence.MappingConventions
+namespace DDDIntro.Persistence.MappingConventions
 {
     public class DefaultMappingConfiguration : DefaultAutomappingConfiguration
     {

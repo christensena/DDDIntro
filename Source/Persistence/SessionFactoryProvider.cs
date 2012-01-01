@@ -2,7 +2,7 @@
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace Persistence
+namespace DDDIntro.Persistence
 {
     public class SessionFactoryProvider : ISessionFactoryProvider
     {
