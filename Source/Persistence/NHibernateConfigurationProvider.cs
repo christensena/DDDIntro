@@ -20,9 +20,9 @@ namespace DDDIntro.Persistence
                 .Database(SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename).ShowSql())
                 //.Database(SQLiteConfiguration.Standard.InMemory())
                 .Mappings(m => m.AutoMappings.Add(
-                    AutoMap.AssemblyOf<Supplier>(new DefaultMappingConfiguration())
+                    AutoMap.AssemblyOf<Player>(new DefaultMappingConfiguration())
                     .Conventions.AddFromAssemblyOf<IdGenerationConvention>()
-                     .UseOverridesFromAssemblyOf<PurchaseOrderMappingOverride>()))
+                     .UseOverridesFromAssemblyOf<OverMappingOverride>()))
                 .ExposeConfiguration(BuildDatabase)
                 .BuildConfiguration();
         }

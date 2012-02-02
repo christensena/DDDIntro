@@ -59,8 +59,8 @@ namespace DDDIntro.Domain
             if (! FieldingTeam.Members.Contains(bowler))
                 throw new InvalidOperationException("Player not a member of the fielding team! " + bowler);
 
-            var over = new Over(this, bowler);
-s           overs.Add(over);
+            var over = new Over(this, bowler); 
+            overs.Add(over);
             return over;
         }
 

@@ -98,8 +98,6 @@
     <Compile Include="MappingConventions\DefaultMappingConfiguration.cs" />
     <Compile Include="MappingConventions\IdGenerationConvention.cs" />
     <Compile Include="MappingOverrides\MatchMappingOverride.cs" />
-    <Compile Include="MappingOverrides\Old\PurchaseOrderLineMappingOverride.cs" />
-    <Compile Include="MappingOverrides\Old\PurchaseOrderMappingOverride.cs" />
     <Compile Include="MappingOverrides\OverMappingOverride.cs" />
     <Compile Include="MappingOverrides\TeamInningsMappingOverride.cs" />
     <Compile Include="MappingOverrides\TeamMappingOverride.cs" />

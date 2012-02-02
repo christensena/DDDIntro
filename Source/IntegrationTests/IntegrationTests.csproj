@@ -109,12 +109,9 @@
   <ItemGroup>
     <Compile Include="Persistence\ContextSetUpHelper.cs" />
     <Compile Include="Persistence\MatchPersistence.cs" />
-    <Compile Include="Persistence\Old\PurchaseOrderPersistence.cs" />
     <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />
-    <Compile Include="Persistence\Old\SupplierPersistence.cs" />
     <Compile Include="Persistence\TeamPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PurchaseOrderServiceSuite.cs" />
     <Compile Include="Services\ServiceTestSuiteBase.cs" />
   </ItemGroup>
   <ItemGroup>
