@@ -8,7 +8,7 @@ namespace DDDIntro.Persistence.MappingConventions
     {
         public override bool ShouldMap(Type type)
         {
-            return type.Namespace == typeof(Supplier).Namespace;
+            return type.Namespace == typeof(Player).Namespace;
         }
 
         public override bool IsComponent(Type type)

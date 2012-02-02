@@ -49,7 +49,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\PurchaseOrderLine_AddRemoveInsert.cs" />
+    <Compile Include="Domain\Old\PurchaseOrderLine_AddRemoveInsert.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

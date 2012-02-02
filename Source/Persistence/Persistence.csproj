@@ -97,8 +97,9 @@
     <Compile Include="ISessionFactoryProvider.cs" />
     <Compile Include="MappingConventions\DefaultMappingConfiguration.cs" />
     <Compile Include="MappingConventions\IdGenerationConvention.cs" />
-    <Compile Include="MappingOverrides\PurchaseOrderLineMappingOverride.cs" />
-    <Compile Include="MappingOverrides\PurchaseOrderMappingOverride.cs" />
+    <Compile Include="MappingOverrides\Old\PurchaseOrderLineMappingOverride.cs" />
+    <Compile Include="MappingOverrides\Old\PurchaseOrderMappingOverride.cs" />
+    <Compile Include="MappingOverrides\TeamMappingOverride.cs" />
     <Compile Include="NHibernateConfigurationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NHibernateRepository.cs" />
