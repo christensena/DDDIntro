@@ -1,4 +1,4 @@
-﻿namespace DDDIntro.Domain
+﻿namespace DDDIntro.Domain.Abstract
 {
     public abstract class Entity
     {

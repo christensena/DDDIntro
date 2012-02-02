@@ -1,5 +1,6 @@
 using System;
 using DDDIntro.Domain;
+using DDDIntro.Domain.Abstract;
 using FluentNHibernate.Automapping;
 
 namespace DDDIntro.Persistence.MappingConventions
@@ -13,7 +14,7 @@ namespace DDDIntro.Persistence.MappingConventions
 
         public override bool IsComponent(Type type)
         {
-            return type == typeof (Address);
+            return typeof(ValueObject).IsAssignableFrom(type);
         }
     }
 }

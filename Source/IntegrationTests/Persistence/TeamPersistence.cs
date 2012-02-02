@@ -10,20 +10,23 @@ namespace DDDIntro.IntegrationTests.Persistence
     [TestFixture]
     public class TeamPersistence : PersistenceTestSuiteBase
     {
+        private ContextSetUpHelper helper;
+
         [SetUp]
         public void SetUp()
         {
+            helper = new ContextSetUpHelper(UnitOfWorkFactory);
         }
 
         [Test]
         public void PersistingTeam_ShouldBeRetrievableForPlayersAndCountry()
         {
             // Arrange
-            var country = SetUpCountry();
+            var country = helper.SetUpCountry("New Zealand");
 
-            var player1 = SetUpPlayer("Ross", "Taylor");
-            var player2 = SetUpPlayer("Brendan", "MacCullum");
-            var player12 = SetUpPlayer("Jesse", "Ryder");
+            var player1 = helper.SetUpPlayer("Ross", "Taylor");
+            var player2 = helper.SetUpPlayer("Brendan", "MacCullum");
+            var player12 = helper.SetUpPlayer("Jesse", "Ryder");
 
             // Act
             Team team;
@@ -51,32 +54,5 @@ namespace DDDIntro.IntegrationTests.Persistence
             retrievedTeam.Members.ElementAt(1).Should().Be(player2);
         }
 
-        private Player SetUpPlayer(string firstName, string lastName)
-        {
-            using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
-            {
-                var player = new Player(firstName, lastName);
-
-                uow.Add(player);
-
-                uow.Complete();
-
-                return player;
-            }
-        }
-
-        private Country SetUpCountry()
-        {
-            using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
-            {
-                var country = new Country("New Zealand");
-
-                uow.Add(country);
-
-                uow.Complete();
-
-                return country;
-            }
-        }
     }
 }

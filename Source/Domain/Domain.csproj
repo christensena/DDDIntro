@@ -71,16 +71,21 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
+    <Compile Include="Match.cs" />
     <Compile Include="Old\Address.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Abstract\Entity.cs" />
     <Compile Include="Old\PurchaseOrder.cs" />
     <Compile Include="Old\PurchaseOrderLine.cs" />
     <Compile Include="Old\Product.cs" />
+    <Compile Include="Over.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Old\Supplier.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TeamInnings.cs" />
+    <Compile Include="Abstract\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

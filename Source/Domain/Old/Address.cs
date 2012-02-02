@@ -1,11 +1,12 @@
 ﻿using System;
+using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
     // this is mapped as a component. 
     // ends up just being fields on the table of a mapped entity but treated as a full class
     // immutable; to change it we need to replace it
-    public class Address
+    public class Address : ValueObject
     {
         public virtual string Line1 { get; private set; }
 

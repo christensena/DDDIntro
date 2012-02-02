@@ -1,4 +1,6 @@
-﻿namespace DDDIntro.Domain
+﻿using DDDIntro.Domain.Abstract;
+
+namespace DDDIntro.Domain
 {
     public class Country : Entity
     {

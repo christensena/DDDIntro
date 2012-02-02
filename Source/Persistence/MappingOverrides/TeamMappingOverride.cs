@@ -11,7 +11,7 @@ namespace DDDIntro.Persistence.MappingOverrides
             mapping.HasMany(x => x.Members)
                 .Access.CamelCaseField() // without this, the 'members' backing field is not proxy populated correctly by NH, producing errors when manipulating the list of a rehydrated Team
                 .AsList(x => x.Column("BattingSequence")) // this means ordering is maintained but I don't need BattingSequence cluttering+complicating my model
-                .Cascade.AllDeleteOrphan(); // with Cascade.All I include saves which means I don't need to add Players to a NH session to get them saved. just save the Team
+                .Cascade.SaveUpdate(); // with Cascade.SaveUpdate I include saves which means I don't need to add Players to a NH session to get them saved. just save the Team
         }
     }
 }
