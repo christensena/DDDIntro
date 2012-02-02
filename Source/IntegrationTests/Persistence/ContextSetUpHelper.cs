@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DDDIntro.Core;
 using DDDIntro.Domain;
@@ -7,6 +8,7 @@ namespace DDDIntro.IntegrationTests.Persistence
     public class ContextSetUpHelper
     {
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
+        private readonly RandomsGenerator randomGenerator = new RandomsGenerator();
 
         public ContextSetUpHelper(IUnitOfWorkFactory unitOfWorkFactory)
         {
@@ -53,10 +55,10 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             var country = SetUpCountry(countryName);
 
-            var twelfthMan = SetUpPlayer("Jesse", "Ryder");
+            var twelfthMan = SetUpPlayer("Jesse", "Ryder" + randomGenerator.GetRandomString());
 
-            var player1 = SetUpPlayer("Brendan", "McCullum");
-            var player2 = SetUpPlayer("Chris", "Martin");
+            var player1 = SetUpPlayer("Brendan", "McCullum" + randomGenerator.GetRandomString());
+            var player2 = SetUpPlayer("Chris", "Martin" + randomGenerator.GetRandomString());
 
             using (var uow = unitOfWorkFactory.BeginUnitOfWork())
             {
@@ -72,6 +74,16 @@ namespace DDDIntro.IntegrationTests.Persistence
                 uow.Complete();
 
                 return team;
+            }
+        }
+
+        private class RandomsGenerator
+        {
+            private readonly Random random = new Random();
+
+            public string GetRandomString()
+            {
+                return random.Next(int.MaxValue).ToString();
             }
         }
     }

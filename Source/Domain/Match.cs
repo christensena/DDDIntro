@@ -57,9 +57,4 @@ namespace DDDIntro.Domain
             return teamInnings;
         }
     }
-
-    public class PlayerInnings : Entity
-    {
-        
-    }
 }

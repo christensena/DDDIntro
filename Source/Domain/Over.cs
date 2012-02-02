@@ -9,6 +9,8 @@ namespace DDDIntro.Domain
     {
         private IList<Ball> balls = new List<Ball>();
 
+        public virtual TeamInnings BattingTeamInnings { get; private set; }
+
         public virtual Player Bowler { get; private set; }
 
         public virtual IEnumerable<Ball> Balls
@@ -16,8 +18,9 @@ namespace DDDIntro.Domain
             get { return balls.ToArray(); }
         }
 
-        internal Over(Player bowler)
+        internal Over(TeamInnings battingTeamInnings, Player bowler)
         {
+            BattingTeamInnings = battingTeamInnings;
             Bowler = bowler;
         }
 
@@ -30,9 +33,15 @@ namespace DDDIntro.Domain
         {
             if (batter == null) throw new ArgumentNullException("batter");
             if (IsOver()) throw new InvalidOperationException();
-            // if had reference to innings here, could verify that batter was in the team batting!
 
-            balls.Add(new Ball(Bowler, batter, runsScored));
+            var ball = new Ball(Bowler, batter, runsScored);
+
+            var batterInnings = BattingTeamInnings.GetBatterInnings(batter);
+            if (! batterInnings.NotOut)
+                throw new InvalidOperationException("Batter is out!");
+
+            balls.Add(ball);
+            batterInnings.BallFaced(ball);
         }
 
         // for NH rehydration only

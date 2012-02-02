@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using DDDIntro.Domain;
 using FluentAssertions;
 using NUnit.Framework;
@@ -29,14 +28,23 @@ namespace DDDIntro.IntegrationTests.Persistence
             int matchID;
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                var match = new Match(DateTime.Today, team1, team2);
+                var battingTeam = team1;
+                var bowlingTeam = team2;
+
+                var match = new Match(DateTime.Today, battingTeam, bowlingTeam);
                 uow.Add(match);
 
-                var team1FirstInnings = match.NewInnings(team1);
-                var over = team1FirstInnings.NewOver(team1.Members.Last());
+                var team1FirstInnings = match.NewInnings(battingTeam);
 
-                var openingBatsman1 = team2.Members.First();
-                var openingBatsman2 = team2.Members.ElementAt(1);
+                var openingBowler1 = bowlingTeam.Members.Last();
+
+                var over = team1FirstInnings.NewOver(openingBowler1);
+
+                var openingBatsman1 = battingTeam.Members.First();
+                var openingBatsman2 = battingTeam.Members.ElementAt(1);
+
+                team1FirstInnings.CommenceBatterInnings(openingBatsman1);
+                team1FirstInnings.CommenceBatterInnings(openingBatsman2);
 
                 over.RecordDelivery(openingBatsman1, 0);
                 over.RecordDelivery(openingBatsman1, 1);
@@ -45,7 +53,8 @@ namespace DDDIntro.IntegrationTests.Persistence
                 over.RecordDelivery(openingBatsman2, 0);
                 over.RecordDelivery(openingBatsman2, 0);
 
-                over = team1FirstInnings.NewOver(team1.Members.ElementAt(1));
+                var openingBowler2 = bowlingTeam.Members.ElementAt(1);
+                over = team1FirstInnings.NewOver(openingBowler2);
                 over.RecordDelivery(openingBatsman1, 0);
                 over.RecordDelivery(openingBatsman1, 0);
                 over.RecordDelivery(openingBatsman1, 4);
