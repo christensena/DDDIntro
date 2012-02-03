@@ -5,7 +5,7 @@ namespace DDDIntro.Domain
 {
     // Ball is Value type. not an entity
     // Immutable
-    public class Ball : ValueObject
+    public class Ball : ValueObject // or ValueObject<Ball> so we dont need Equals implementation here
     {
         public virtual Player Bowler { get; private set; }
 
