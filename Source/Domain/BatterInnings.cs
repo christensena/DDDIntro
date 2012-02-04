@@ -15,6 +15,10 @@ namespace DDDIntro.Domain
 
         public virtual bool NotOut { get; private set; }
 
+        public virtual DateTime StartTime { get; private set; }
+
+        public virtual DateTime? EndTime { get; private set; }
+
         internal BatterInnings(TeamInnings teamInnings, Player batter)
         {
             if (teamInnings == null) throw new ArgumentNullException("teamInnings");
@@ -23,6 +27,7 @@ namespace DDDIntro.Domain
             TeamInnings = teamInnings;
             Batter = batter;
             NotOut = true;
+            StartTime = DateTime.Now;
         }
 
         public virtual void BallFaced(Ball ball)
@@ -33,9 +38,15 @@ namespace DDDIntro.Domain
             RunsScored += ball.RunsScored;
         }
 
+        public virtual TimeSpan GetDuration()
+        {
+            return (EndTime ?? DateTime.Now).Subtract(StartTime);
+        }
+
         public virtual void Dismiss() // method of dismissal?
         {
             NotOut = false;
+            EndTime = DateTime.Now;
         }
 
         // for NH rehydration

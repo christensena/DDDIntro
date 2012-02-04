@@ -44,12 +44,11 @@ namespace DDDIntro.Domain
             if (batter == null) throw new ArgumentNullException("batter");
             if (IsOver()) throw new InvalidOperationException();
 
-            var ball = new Ball(Bowler, batter, runsScored);
-
             var batterInnings = BattingTeamInnings.GetBatterInnings(batter);
             if (! batterInnings.NotOut)
                 throw new InvalidOperationException("Batter is out!");
 
+            var ball = new Ball(Bowler, batter, runsScored);
             balls.Add(ball);
             batterInnings.BallFaced(ball);
         }
