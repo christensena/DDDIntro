@@ -29,6 +29,16 @@ namespace DDDIntro.Domain
             return balls.Count() == 6; // naive; what about no balls, etc?
         }
 
+        public virtual int RunsScored()
+        {
+            return balls.Sum(b => b.RunsScored);
+        }
+
+        public virtual bool IsMaiden()
+        {
+            return RunsScored() == 0;
+        }
+
         public virtual void RecordDelivery(Player batter, int runsScored)
         {
             if (batter == null) throw new ArgumentNullException("batter");

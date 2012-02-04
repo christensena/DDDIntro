@@ -18,6 +18,12 @@ namespace DDDIntro.Persistence.MappingOverrides
                 .Access.CamelCaseField()
                 .AsList(x => x.Column("BattingOrder"))
                 .Cascade.AllDeleteOrphan();
+
+            mapping.HasMany(x => x.BowlingSpells)
+                .Access.CamelCaseField()
+                .AsList(x => x.Column("Number"))
+                .Cascade.AllDeleteOrphan();
+
         }
     }
 }

@@ -9,6 +9,7 @@ namespace DDDIntro.Domain
     {
         private IList<Over> overs = new List<Over>();
         private IList<BatterInnings> batterInnings = new List<BatterInnings>();
+        private IList<BowlingSpell> bowlingSpells = new List<BowlingSpell>();
 
         public virtual Team BattingTeam { get; private set; }
 
@@ -22,6 +23,11 @@ namespace DDDIntro.Domain
         public virtual IEnumerable<BatterInnings> BatterInnings
         {
             get { return batterInnings.ToArray(); }
+        }
+
+        public virtual IEnumerable<BowlingSpell> BowlingSpells
+        {
+            get { return bowlingSpells.ToArray(); }
         }
 
         internal TeamInnings(Team battingTeam, Team fieldingTeam)
@@ -61,7 +67,21 @@ namespace DDDIntro.Domain
 
             var over = new Over(this, bowler); 
             overs.Add(over);
+
+            GetBowlingSpell(bowler).RecordOverCommenced(over);
+
             return over;
+        }
+
+        private BowlingSpell GetBowlingSpell(Player bowler)
+        {
+            var bowlingSpell = bowlingSpells.SingleOrDefault(bs => bs.Bowler.Equals(bowler));
+            if (bowlingSpell == null)
+            {
+                bowlingSpell = new BowlingSpell(bowler);
+                bowlingSpells.Add(bowlingSpell);
+            }
+            return bowlingSpell;
         }
 
         // for NH rehydration
