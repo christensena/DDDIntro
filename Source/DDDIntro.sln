@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Services", "Domain.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9A316C23-C885-4220-92F2-EE7EAF95BBCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{53C12DAA-249C-4A6E-B56E-3A78BBD7ED16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,5 +82,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B7D0B6F-9778-4284-83A2-70654F5C9AE6} = {53C12DAA-249C-4A6E-B56E-3A78BBD7ED16}
+		{9A316C23-C885-4220-92F2-EE7EAF95BBCD} = {53C12DAA-249C-4A6E-B56E-3A78BBD7ED16}
 	EndGlobalSection
 EndGlobal

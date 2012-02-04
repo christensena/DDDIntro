@@ -73,6 +73,11 @@ namespace DDDIntro.Domain
             return over;
         }
 
+        public virtual int GetScore()
+        {
+            return overs.Sum(o => o.RunsScored());
+        }
+
         private BowlingSpell GetBowlingSpell(Player bowler)
         {
             var bowlingSpell = bowlingSpells.SingleOrDefault(bs => bs.Bowler.Equals(bowler));

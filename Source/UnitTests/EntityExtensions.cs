@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.UnitTests
 {
@@ -15,10 +16,10 @@ namespace DDDIntro.UnitTests
             }
             else
             {
-                var propertyInfo = typeof (TEntity).GetProperty("Id");
+                var propertyInfo = typeof (Entity).GetProperty("Id");
                 if (propertyInfo == null)
                 {
-                    throw new ArgumentException("No field named 'id' or property named 'Id' found on object of type: " + typeof(TEntity).FullName);
+                    throw new ArgumentException("No field named 'id' or property named 'Id' found on object of type: " + typeof (TEntity).FullName);
                 }
                 propertyInfo.SetValue(obj, id, null);
             }
