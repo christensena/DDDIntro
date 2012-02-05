@@ -33,6 +33,7 @@ namespace DDDIntro.Domain
         public virtual void BallFaced(Ball ball)
         {
             if (ball == null) throw new ArgumentNullException("ball");
+            if (! NotOut) throw new InvalidOperationException("Cannot face a ball after being dismissed!");
 
             BallsFaced++;
             RunsScored += ball.RunsScored;
@@ -43,6 +44,7 @@ namespace DDDIntro.Domain
             return (EndTime ?? DateTime.Now).Subtract(StartTime);
         }
 
+        // this is an area not started yet; will change drastically from this
         public virtual void Dismiss() // method of dismissal?
         {
             NotOut = false;

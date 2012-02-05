@@ -55,6 +55,7 @@ namespace DDDIntro.Domain
             }
         }
 
+        // we overload the == and != operator for value types (but not for entities)
         public static bool operator ==(Ball left, Ball right)
         {
             return Equals(left, right);
