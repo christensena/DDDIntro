@@ -1,10 +1,9 @@
-using System;
 using DDDIntro.Domain;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using FluentNHibernate.Mapping;
 
-namespace DDDIntro.Persistence.MappingOverrides
+namespace DDDIntro.Persistence.NHibernate.MappingOverrides
 {
     public class OverMappingOverride : IAutoMappingOverride<Over>
     {

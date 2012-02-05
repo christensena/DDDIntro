@@ -1,5 +1,5 @@
 ﻿using DDDIntro.Core;
-using DDDIntro.Persistence;
+using DDDIntro.Persistence.NHibernate;
 using NHibernate;
 using NUnit.Framework;
 
@@ -40,6 +40,5 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             repositorySession.Dispose();
         }
-        
     }
 }

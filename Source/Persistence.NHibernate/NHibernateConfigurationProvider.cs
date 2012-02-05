@@ -1,14 +1,14 @@
 ﻿using System.IO;
 using DDDIntro.Domain;
-using DDDIntro.Persistence.MappingConventions;
-using DDDIntro.Persistence.MappingOverrides;
+using DDDIntro.Persistence.NHibernate.MappingConventions;
+using DDDIntro.Persistence.NHibernate.MappingOverrides;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace DDDIntro.Persistence
+namespace DDDIntro.Persistence.NHibernate
 {
     public static class NHibernateConfigurationProvider
     {

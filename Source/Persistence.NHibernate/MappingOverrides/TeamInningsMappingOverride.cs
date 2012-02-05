@@ -1,9 +1,8 @@
-using System;
 using DDDIntro.Domain;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
-namespace DDDIntro.Persistence.MappingOverrides
+namespace DDDIntro.Persistence.NHibernate.MappingOverrides
 {
     public class TeamInningsMappingOverride : IAutoMappingOverride<TeamInnings>
     {

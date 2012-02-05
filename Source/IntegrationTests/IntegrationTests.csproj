@@ -127,9 +127,9 @@
       <Project>{DCD83940-8291-4A19-954C-CEF5943AE3F5}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Persistence\Persistence.csproj">
+    <ProjectReference Include="..\Persistence.NHibernate\Persistence.NHibernate.csproj">
       <Project>{CC822684-2088-480B-9497-C76965066F24}</Project>
-      <Name>Persistence</Name>
+      <Name>Persistence.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

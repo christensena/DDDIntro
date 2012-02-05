@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 
-namespace DDDIntro.Persistence.MappingConventions
+namespace DDDIntro.Persistence.NHibernate.MappingConventions
 {
     public class IdGenerationConvention : IIdConvention
     {

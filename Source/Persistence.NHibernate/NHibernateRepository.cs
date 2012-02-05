@@ -4,7 +4,7 @@ using DDDIntro.Core;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace DDDIntro.Persistence
+namespace DDDIntro.Persistence.NHibernate
 {
     public class NHibernateRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

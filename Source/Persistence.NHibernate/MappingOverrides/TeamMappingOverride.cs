@@ -2,7 +2,7 @@ using DDDIntro.Domain;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
-namespace DDDIntro.Persistence.MappingOverrides
+namespace DDDIntro.Persistence.NHibernate.MappingOverrides
 {
     public class TeamMappingOverride : IAutoMappingOverride<Team>
     {

@@ -2,7 +2,7 @@ using System;
 using DDDIntro.Core;
 using NHibernate;
 
-namespace DDDIntro.Persistence
+namespace DDDIntro.Persistence.NHibernate
 {
     public class NHibernateUnitOfWorkFactory : IUnitOfWorkFactory
     {

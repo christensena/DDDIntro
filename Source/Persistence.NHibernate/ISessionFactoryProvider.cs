@@ -1,6 +1,6 @@
 using NHibernate;
 
-namespace DDDIntro.Persistence
+namespace DDDIntro.Persistence.NHibernate
 {
     public interface ISessionFactoryProvider
     {
