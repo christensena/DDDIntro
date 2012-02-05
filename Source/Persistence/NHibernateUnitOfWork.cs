@@ -44,6 +44,12 @@ namespace DDDIntro.Persistence
             session.Save(entity);
         }
 
+        public void Remove<TEntity>(TEntity entity) where TEntity : class
+        {
+            if (entity == null) throw new ArgumentNullException("entity");
+            session.Delete(entity);
+        }
+
         public void Complete()
         {
             transaction.Commit();

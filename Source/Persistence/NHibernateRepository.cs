@@ -6,7 +6,7 @@ using NHibernate.Linq;
 
 namespace DDDIntro.Persistence
 {
-    public class NHibernateRepository<TEntity> : IRepository<TEntity>
+    public class NHibernateRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly ISession session;
 
@@ -28,7 +28,15 @@ namespace DDDIntro.Persistence
 
         public void Add(TEntity entity)
         {
+            if (entity == null) throw new ArgumentNullException("entity");
+            // not, not SaveOrUpdate as we don't need Update if we use Unit of Work semantics
             session.Save(entity);
+        }
+
+        public void Remove(TEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException("entity");
+            session.Delete(entity);
         }
     }
 }
