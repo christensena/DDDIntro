@@ -30,13 +30,13 @@ namespace DDDIntro.Domain
             StartTime = DateTime.Now;
         }
 
-        public virtual void BallFaced(Ball ball)
+        public virtual void BallFaced(Delivery delivery)
         {
-            if (ball == null) throw new ArgumentNullException("ball");
-            if (! NotOut) throw new InvalidOperationException("Cannot face a ball after being dismissed!");
+            if (delivery == null) throw new ArgumentNullException("delivery");
+            if (! NotOut) throw new InvalidOperationException("Cannot face a Delivery after being dismissed!");
 
             BallsFaced++;
-            RunsScored += ball.RunsScored;
+            RunsScored += delivery.RunsScored;
         }
 
         public virtual TimeSpan GetDuration()

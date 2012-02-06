@@ -3,9 +3,9 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    // Ball is Value type. not an entity
+    // Delivery is Value type. not an entity
     // Immutable
-    public class Ball : ValueObject // or ValueObject<Ball> so we dont need Equals implementation here
+    public class Delivery : ValueObject // or ValueObject<Delivery> so we dont need Equals implementation here
     {
         public virtual Player Bowler { get; private set; }
 
@@ -13,7 +13,7 @@ namespace DDDIntro.Domain
 
         public virtual int RunsScored { get; private set; } // naive; what about team vs player runs?
 
-        internal Ball(Player bowler, Player batter, int runsScored)
+        internal Delivery(Player bowler, Player batter, int runsScored)
         {
             if (bowler == null) throw new ArgumentNullException("bowler");
             if (batter == null) throw new ArgumentNullException("batter");
@@ -25,11 +25,11 @@ namespace DDDIntro.Domain
         }
 
         // for NH
-        protected Ball()
+        protected Delivery()
         {
         }
 
-        public bool Equals(Ball other)
+        public bool Equals(Delivery other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -40,8 +40,8 @@ namespace DDDIntro.Domain
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Ball)) return false;
-            return Equals((Ball) obj);
+            if (obj.GetType() != typeof (Delivery)) return false;
+            return Equals((Delivery) obj);
         }
 
         public override int GetHashCode()
@@ -56,12 +56,12 @@ namespace DDDIntro.Domain
         }
 
         // we overload the == and != operator for value types (but not for entities)
-        public static bool operator ==(Ball left, Ball right)
+        public static bool operator ==(Delivery left, Delivery right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Ball left, Ball right)
+        public static bool operator !=(Delivery left, Delivery right)
         {
             return !Equals(left, right);
         }

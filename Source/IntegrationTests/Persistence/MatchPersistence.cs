@@ -77,7 +77,7 @@ namespace DDDIntro.IntegrationTests.Persistence
             teamInnings.Overs.Should().HaveCount(2);
 
             var firstOver = teamInnings.Overs.First();
-            firstOver.Balls.Should().HaveCount(6);
+            firstOver.Deliveries.Should().HaveCount(6);
         }
 
         

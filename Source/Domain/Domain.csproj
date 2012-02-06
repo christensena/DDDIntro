@@ -71,7 +71,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ball.cs" />
+    <Compile Include="Delivery.cs" />
     <Compile Include="BowlingSpell.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Country.cs" />

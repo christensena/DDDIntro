@@ -7,15 +7,15 @@ namespace DDDIntro.Domain
 {
     public class Over : Entity
     {
-        private IList<Ball> balls = new List<Ball>();
+        private IList<Delivery> deliveries = new List<Delivery>();
 
         public virtual TeamInnings BattingTeamInnings { get; private set; }
 
         public virtual Player Bowler { get; private set; }
 
-        public virtual IEnumerable<Ball> Balls
+        public virtual IEnumerable<Delivery> Deliveries
         {
-            get { return balls.ToArray(); }
+            get { return deliveries.ToArray(); }
         }
 
         internal Over(TeamInnings battingTeamInnings, Player bowler)
@@ -26,12 +26,12 @@ namespace DDDIntro.Domain
 
         public virtual bool IsOver()
         {
-            return balls.Count() == 6; // naive; what about no balls, etc?
+            return deliveries.Count() == 6; // naive; what about no-balls, etc?
         }
 
         public virtual int RunsScored()
         {
-            return balls.Sum(b => b.RunsScored);
+            return deliveries.Sum(b => b.RunsScored);
         }
 
         public virtual bool IsMaiden()
@@ -42,15 +42,15 @@ namespace DDDIntro.Domain
         public virtual void RecordDelivery(Player batter, int runsScored)
         {
             if (batter == null) throw new ArgumentNullException("batter");
-            if (IsOver()) throw new InvalidOperationException();
+            if (IsOver()) throw new InvalidOperationException("Over is over so can't fit more deliveries!");
 
             var batterInnings = BattingTeamInnings.GetBatterInnings(batter);
             if (! batterInnings.NotOut)
                 throw new InvalidOperationException("Batter is out!");
 
-            var ball = new Ball(Bowler, batter, runsScored);
-            balls.Add(ball);
-            batterInnings.BallFaced(ball);
+            var delivery = new Delivery(Bowler, batter, runsScored);
+            deliveries.Add(delivery);
+            batterInnings.BallFaced(delivery);
         }
 
         // for NH rehydration only

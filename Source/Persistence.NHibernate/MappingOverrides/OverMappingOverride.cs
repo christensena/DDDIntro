@@ -9,9 +9,9 @@ namespace DDDIntro.Persistence.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Over> mapping)
         {
-            mapping.HasMany(x => x.Balls)
+            mapping.HasMany(x => x.Deliveries)
                 .Access.CamelCaseField()
-                .AsList(x => x.Column("Number"))
+                .AsList(x => x.Column("BallNumber"))
                 .Component(BallComponentMapping.Map)
                 .Cascade.AllDeleteOrphan();
         }
@@ -19,7 +19,7 @@ namespace DDDIntro.Persistence.NHibernate.MappingOverrides
 
     public sealed class BallComponentMapping
     {
-        public static void Map(CompositeElementPart<Ball> part)
+        public static void Map(CompositeElementPart<Delivery> part)
         {
             part.References(x => x.Batter);
             part.References(x => x.Bowler);
