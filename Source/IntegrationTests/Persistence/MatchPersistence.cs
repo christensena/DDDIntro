@@ -21,18 +21,18 @@ namespace DDDIntro.IntegrationTests.Persistence
         public void PersistSingleInningsWithTwoOvers_ShouldBeRetrievable()
         {
             // Arrange
-            var team1 = helper.SetUpTeam("New Zealand");
-            var team2 = helper.SetUpTeam("South Africa");
+            var nzl = helper.SetUpCountry("New Zealand");
+            var zim = helper.SetUpCountry("Zimbabwe");
+
+            var matchID = helper.SetUpMatch(nzl, zim);
 
             // Act
-            int matchID;
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                var battingTeam = team1;
-                var bowlingTeam = team2;
+                var match = uow.GetById<Match>(matchID);
 
-                var match = new Match(DateTime.Today, battingTeam, bowlingTeam);
-                uow.Add(match);
+                var battingTeam = match.Team1;
+                var bowlingTeam = match.Team2;
 
                 var team1FirstInnings = match.NewInnings(battingTeam);
 
@@ -71,13 +71,15 @@ namespace DDDIntro.IntegrationTests.Persistence
             var retrievedMatch = GetRepository<Match>().GetById(matchID);
             retrievedMatch.Should().NotBeNull();
             retrievedMatch.Innings.Should().HaveCount(1);
+            retrievedMatch.Team1.Country.Should().Be(nzl);
+            retrievedMatch.Team2.Country.Should().Be(zim);
             var teamInnings = retrievedMatch.Innings.Single();
-            teamInnings.BattingTeam.Should().Be(team1);
-            teamInnings.FieldingTeam.Should().Be(team2);
             teamInnings.Overs.Should().HaveCount(2);
 
             var firstOver = teamInnings.Overs.First();
             firstOver.Balls.Should().HaveCount(6);
         }
+
+        
     }
 }

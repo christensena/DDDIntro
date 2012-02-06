@@ -9,25 +9,35 @@ namespace DDDIntro.Domain
     public class Match : Entity
     {
         private IList<TeamInnings> innings = new List<TeamInnings>();
+        private IList<Team> teams = new List<Team>();
 
         public virtual DateTime Date { get; private set; }
 
-        public virtual Team Team1 { get; private set; }
-        
-        public virtual Team Team2 { get; private set; }
+        public virtual Team Team1
+        {
+            get { return teams[0]; }
+        }
+
+        public virtual Team Team2
+        {
+            get { return teams[1]; }
+        }
+
+        public virtual IEnumerable<Team> Teams { get { return teams.ToArray(); } }
 
         public virtual IEnumerable<TeamInnings> Innings
         {
             get { return innings.ToArray(); }
         }
 
-        public Match(DateTime date, Team team1, Team team2)
+        public Match(DateTime date, Country team1Country, Country team2Country)
         {
-            if (team1 == null) throw new ArgumentNullException("team1");
-            if (team2 == null) throw new ArgumentNullException("team2");
+            if (team1Country == null) throw new ArgumentNullException("team1Country");
+            if (team2Country == null) throw new ArgumentNullException("team2Country");
+            if (team1Country.Equals(team2Country)) throw new ArgumentException("Teams must not be the same country!");
             Date = date;
-            Team1 = team1;
-            Team2 = team2;
+            teams.Add(new Team(this, team1Country));
+            teams.Add(new Team(this, team2Country));
         }
 
         // for NH rehydration only

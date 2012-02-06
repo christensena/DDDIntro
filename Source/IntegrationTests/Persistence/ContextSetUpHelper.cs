@@ -15,25 +15,7 @@ namespace DDDIntro.IntegrationTests.Persistence
             this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public Player SetUpPlayer(string firstName, string lastName)
-        {
-            using (var uow = unitOfWorkFactory.BeginUnitOfWork())
-            {
-                var player = uow.GetAll<Player>().SingleOrDefault(x => x.FirstName == firstName && x.LastName == lastName);
-                if (player != null)
-                    return player;
-
-                player = new Player(firstName, lastName);
-
-                uow.Add(player);
-
-                uow.Complete();
-
-                return player;
-            }
-        }
-
-        public Country SetUpCountry(string countryName = "New Zealand")
+        public Country SetUpCountry(string countryName)
         {
             using (var uow = unitOfWorkFactory.BeginUnitOfWork())
             {
@@ -50,33 +32,72 @@ namespace DDDIntro.IntegrationTests.Persistence
                 return country;
             }
         }
-     
-        public Team SetUpTeam(string countryName)
+
+        public void PopulateCountryPlayerPool(string countryName)
         {
-            var country = SetUpCountry(countryName);
+            SetUpPlayer("Jesse", "Ryder" + randomGenerator.GetRandomString(), countryName);
+            SetUpPlayer("Brendan", "McCullum" + randomGenerator.GetRandomString(), countryName);
+            SetUpPlayer("Chris", "Martin" + randomGenerator.GetRandomString(), countryName);
+            SetUpPlayer("Martin", "Guptill" + randomGenerator.GetRandomString(), countryName);
+            SetUpPlayer("Ross", "Taylor" + randomGenerator.GetRandomString(), countryName);
+            SetUpPlayer("Daniel", "Vettori" + randomGenerator.GetRandomString(), countryName);
+        }
+     
+        public void PickTeam(Team team, IAggregateRepository aggregateRepository)
+        {
+            var countryName = team.Country.Name;
+            var playersForCountry = aggregateRepository.GetAll<Player>().Where(p => p.Country.Name.Equals(countryName));
 
-            var twelfthMan = SetUpPlayer("Jesse", "Ryder" + randomGenerator.GetRandomString());
-
-            var player1 = SetUpPlayer("Brendan", "McCullum" + randomGenerator.GetRandomString());
-            var player2 = SetUpPlayer("Chris", "Martin" + randomGenerator.GetRandomString());
-
-            using (var uow = unitOfWorkFactory.BeginUnitOfWork())
+            var random = new Random();
+            var availablePlayers = playersForCountry.ToList();
+            while (availablePlayers.Any() && ! team.IsTeamComplete())
             {
-                var team = new Team(country);
+                var pickedPlayer = availablePlayers[random.Next(availablePlayers.Count)];
+                team.AddMember(pickedPlayer);
+                availablePlayers.Remove(pickedPlayer);
+            }
 
-                team.AddMember(player1);
-                team.AddMember(player2);
-
-                team.TwelfthMan = twelfthMan;
-
-                uow.Add(team);
-
-                uow.Complete();
-
-                return team;
+            if (availablePlayers.Any())
+            {
+                team.TwelfthMan = availablePlayers[random.Next(availablePlayers.Count)];
             }
         }
 
+        public Player SetUpPlayer(string firstName, string lastName, string countryName)
+        {
+            using (var uow = unitOfWorkFactory.BeginUnitOfWork())
+            {
+                var country = uow.GetAll<Country>().Single(x => x.Name == countryName);
+
+                var player = new Player(firstName, lastName, country);
+
+                uow.Add(player);
+
+                uow.Complete();
+
+                return player;
+            }
+        }
+
+        public int SetUpMatch(Country country1, Country country2)
+        {
+            PopulateCountryPlayerPool(country1.Name);
+            PopulateCountryPlayerPool(country2.Name);
+
+            using (var uow = unitOfWorkFactory.BeginUnitOfWork())
+            {
+                var match = new Match(DateTime.Today, country1, country2);
+
+                PickTeam(match.Team1, uow);
+                PickTeam(match.Team2, uow);
+
+                uow.Add(match);
+
+                uow.Complete();
+
+                return match.Id;
+            }
+        }
         private class RandomsGenerator
         {
             private readonly Random random = new Random();

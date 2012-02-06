@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using DDDIntro.Domain;
 using FluentAssertions;
 using NUnit.Framework;
@@ -23,17 +22,30 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             // Arrange
             var country = helper.SetUpCountry("New Zealand");
+            var otherCountry = helper.SetUpCountry("Other Country");
 
-            var player1 = helper.SetUpPlayer("Ross", "Taylor");
-            var player2 = helper.SetUpPlayer("Brendan", "MacCullum");
-            var player12 = helper.SetUpPlayer("Jesse", "Ryder");
+            var player1 = helper.SetUpPlayer("Ross", "Taylor", country.Name);
+            var player2 = helper.SetUpPlayer("Brendan", "MacCullum", country.Name);
+            var player12 = helper.SetUpPlayer("Jesse", "Ryder", country.Name);
 
-            // Act
-            Team team;
+            int matchID;
 
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                team = new Team(country);
+                var match = new Match(DateTime.Today, country, otherCountry);
+                uow.Add(match);
+
+                uow.Complete();
+
+                matchID = match.Id;
+            }
+
+            // Act
+            using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
+            {
+                var match = uow.GetById<Match>(matchID);
+
+                var team = match.Team1;
 
                 team.AddMember(player1);
                 team.AddMember(player2);
@@ -46,7 +58,8 @@ namespace DDDIntro.IntegrationTests.Persistence
             }
 
             // Assert
-            var retrievedTeam = GetRepository<Team>().GetById(team.Id);
+            var retrievedMatch = GetRepository<Match>().GetById(matchID);
+            var retrievedTeam = retrievedMatch.Team1;
             retrievedTeam.Should().NotBeNull();
             retrievedTeam.Country.Should().Be(country);
             retrievedTeam.TwelfthMan.Should().Be(player12);

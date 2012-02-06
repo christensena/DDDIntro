@@ -1,3 +1,4 @@
+using System;
 using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
@@ -8,10 +9,20 @@ namespace DDDIntro.Domain
 
         public virtual string LastName { get; private set; }
 
-        public Player(string firstName, string lastName)
+        public virtual Country Country { get; private set; }
+
+        public Player(string firstName, string lastName, Country country)
         {
+            if (country == null) throw new ArgumentNullException("country");
             FirstName = firstName;
             LastName = lastName;
+            Country = country;
+        }
+
+        public virtual void ChangeCountry(Country country)
+        {
+            if (country == null) throw new ArgumentNullException("country");
+            Country = country;
         }
 
         // for NH rehydration only

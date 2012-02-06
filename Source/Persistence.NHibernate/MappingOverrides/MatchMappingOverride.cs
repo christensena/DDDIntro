@@ -14,6 +14,15 @@ namespace DDDIntro.Persistence.NHibernate.MappingOverrides
                 .Cascade.AllDeleteOrphan(); // with Cascade.AllDeleteOrphan I include saves which means I don't need to add Overs to a NH session to get them saved. just save the Match
             // unlike for Team->Player, an Innings makes sense only in the context of a Match otherwise it doesn't exist
             // so I have AllDeleteOrphan to delete all innings if a match is deleted
+
+            // we need to cascade all as Match "owns" team; including creation
+            mapping.HasMany(x => x.Teams)
+                .Access.CamelCaseField()
+                .AsList(x => x.Column("Number"))
+                .Cascade.AllDeleteOrphan();
+
+            mapping.IgnoreProperty(x => x.Team1);
+            mapping.IgnoreProperty(x => x.Team2);
         }
     }
 }

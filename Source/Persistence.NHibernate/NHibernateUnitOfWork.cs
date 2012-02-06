@@ -18,6 +18,7 @@ namespace DDDIntro.Persistence.NHibernate
 
             session = sessionFactory.OpenSession();
             transaction = session.BeginTransaction();
+            sessionWasProvided = false;
         }
 
         public NHibernateUnitOfWork(ISession session)
@@ -60,7 +61,7 @@ namespace DDDIntro.Persistence.NHibernate
             if (transaction.IsActive)
                 transaction.Rollback();
 
-            if (sessionWasProvided)
+            if (! sessionWasProvided)
             {
                 session.Dispose();
             }

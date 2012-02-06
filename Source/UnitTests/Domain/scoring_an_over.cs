@@ -11,20 +11,24 @@ namespace DDDIntro.UnitTests.Domain
     {
         Establish context = () =>
             {
-                var team1 = new Team(new Country("Australia").WithId(1)).WithId(1);
-                team1.AddMember(new Player("Matthew", "Hayden").WithId(1));
-                team1.AddMember(new Player("Mark", "Waugh").WithId(2));
-                team1.AddMember(new Player("David", "Boon").WithId(3));
-                team1.AddMember(new Player("Brad", "Haddin").WithId(4));
-                bowler = new Player("Glenn", "McGrath").WithId(5);
+                var australia = new Country("Australia").WithId(1);
+                var england = new Country("England").WithId(2);
+
+                var match = new Match(DateTime.Today, australia, england);
+
+                var team1 = match.Team1.WithId(1);
+                team1.AddMember(new Player("Matthew", "Hayden", australia).WithId(1));
+                team1.AddMember(new Player("Mark", "Waugh", australia).WithId(2));
+                team1.AddMember(new Player("David", "Boon", australia).WithId(3));
+                team1.AddMember(new Player("Brad", "Haddin", australia).WithId(4));
+                bowler = new Player("Glenn", "McGrath", australia).WithId(5);
                 team1.AddMember(bowler);
 
-                battingTeam = new Team(new Country("England").WithId(2)).WithId(2);
-                battingTeam.AddMember(new Player("Mark", "Trescothick").WithId(13));
-                battingTeam.AddMember(new Player("Graham", "Gooch").WithId(14));
+                battingTeam = match.Team2.WithId(2);
+                battingTeam.AddMember(new Player("Mark", "Trescothick", england).WithId(13));
+                battingTeam.AddMember(new Player("Graham", "Gooch", england).WithId(14));
                 //team2.AddMember(new Player(""));
 
-                var match = new Match(DateTime.Today, team1, battingTeam);
                 firstInnings = match.NewInnings(battingTeam);
             };
 

@@ -9,6 +9,8 @@ namespace DDDIntro.Domain
     {
         private IList<Player> members = new List<Player>();
 
+        public virtual Match Match { get; private set; }
+
         public virtual Country Country { get; private set; }
 
         public virtual Player TwelfthMan { get; set; }
@@ -18,9 +20,9 @@ namespace DDDIntro.Domain
             get { return members.ToArray(); }
         }
 
-        public Team(Country country)
+        internal Team(Match match, Country country)
         {
-            if (country == null) throw new ArgumentNullException("country");
+            Match = match;
             Country = country;
         }
 
