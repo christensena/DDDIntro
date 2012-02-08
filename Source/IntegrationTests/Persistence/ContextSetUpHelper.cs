@@ -35,12 +35,10 @@ namespace DDDIntro.IntegrationTests.Persistence
 
         public void PopulateCountryPlayerPool(string countryName)
         {
-            SetUpPlayer("Jesse", "Ryder" + randomGenerator.GetRandomString(), countryName);
-            SetUpPlayer("Brendan", "McCullum" + randomGenerator.GetRandomString(), countryName);
-            SetUpPlayer("Chris", "Martin" + randomGenerator.GetRandomString(), countryName);
-            SetUpPlayer("Martin", "Guptill" + randomGenerator.GetRandomString(), countryName);
-            SetUpPlayer("Ross", "Taylor" + randomGenerator.GetRandomString(), countryName);
-            SetUpPlayer("Daniel", "Vettori" + randomGenerator.GetRandomString(), countryName);
+            for (var i = 0; i < 22; i++)
+            {
+                SetUpRandomPlayer(countryName);
+            }
         }
      
         public void PickTeam(Team team, IAggregateRepository aggregateRepository)
@@ -55,11 +53,6 @@ namespace DDDIntro.IntegrationTests.Persistence
                 var pickedPlayer = availablePlayers[random.Next(availablePlayers.Count)];
                 team.AddMember(pickedPlayer);
                 availablePlayers.Remove(pickedPlayer);
-            }
-
-            if (availablePlayers.Any())
-            {
-                team.TwelfthMan = availablePlayers[random.Next(availablePlayers.Count)];
             }
         }
 
@@ -77,6 +70,11 @@ namespace DDDIntro.IntegrationTests.Persistence
 
                 return player;
             }
+        }
+
+        public Player SetUpRandomPlayer(string countryName)
+        {
+            return SetUpPlayer(randomGenerator.GetRandomString(), randomGenerator.GetRandomString(), countryName);
         }
 
         public int SetUpMatch(Country country1, Country country2)

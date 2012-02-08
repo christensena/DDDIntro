@@ -24,9 +24,7 @@ namespace DDDIntro.IntegrationTests.Persistence
             var country = helper.SetUpCountry("New Zealand");
             var otherCountry = helper.SetUpCountry("Other Country");
 
-            var player1 = helper.SetUpPlayer("Ross", "Taylor", country.Name);
-            var player2 = helper.SetUpPlayer("Brendan", "MacCullum", country.Name);
-            var player12 = helper.SetUpPlayer("Jesse", "Ryder", country.Name);
+            helper.PopulateCountryPlayerPool(country.Name);
 
             int matchID;
 
@@ -41,18 +39,17 @@ namespace DDDIntro.IntegrationTests.Persistence
             }
 
             // Act
+            Player player1;
+            Player twelfthMan;
+
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
                 var match = uow.GetById<Match>(matchID);
 
-                var team = match.Team1;
+                helper.PickTeam(match.Team1, uow);
 
-                team.AddMember(player1);
-                team.AddMember(player2);
-
-                team.TwelfthMan = player12;
-
-                uow.Add(team);
+                player1 = match.Team1.Members.First();
+                twelfthMan = match.Team1.TwelfthMan;
 
                 uow.Complete();
             }
@@ -62,9 +59,8 @@ namespace DDDIntro.IntegrationTests.Persistence
             var retrievedTeam = retrievedMatch.Team1;
             retrievedTeam.Should().NotBeNull();
             retrievedTeam.Country.Should().Be(country);
-            retrievedTeam.TwelfthMan.Should().Be(player12);
+            retrievedTeam.TwelfthMan.Should().Be(twelfthMan);
             retrievedTeam.Members.ElementAt(0).Should().Be(player1);
-            retrievedTeam.Members.ElementAt(1).Should().Be(player2);
         }
 
     }
