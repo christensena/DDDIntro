@@ -21,16 +21,19 @@ namespace DDDIntro.IntegrationTests.Persistence
         public void PersistingTeam_ShouldBeRetrievableForPlayersAndCountry()
         {
             // Arrange
-            var country = helper.SetUpCountry("New Zealand");
-            var otherCountry = helper.SetUpCountry("Other Country");
+            var nzl = helper.SetUpCountry("New Zealand");
+            var saf = helper.SetUpCountry("South Africa");
 
-            helper.PopulateCountryPlayerPool(country.Name);
+            //helper.PopulateCountryPlayerPool(country.Name);
+
+            var rossTaylor = helper.SetUpPlayer("Ross", "Taylor", nzl.Name);
+            var brendanMccullumn = helper.SetUpPlayer("Brendan", "Mccullum", nzl.Name);
 
             int matchID;
 
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                var match = new Match(DateTime.Today, country, otherCountry);
+                var match = new Match(DateTime.Today, nzl, saf);
                 uow.Add(match);
 
                 uow.Complete();
@@ -40,16 +43,17 @@ namespace DDDIntro.IntegrationTests.Persistence
 
             // Act
             Player player1;
-            Player twelfthMan;
 
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
                 var match = uow.GetById<Match>(matchID);
 
-                helper.PickTeam(match.Team1, uow);
+                //helper.PickTeam(match.Team1, uow);
+                var team1 = match.Team1;
+                team1.AddMember(rossTaylor);
+                team1.AddMember(brendanMccullumn);
 
                 player1 = match.Team1.Members.First();
-                twelfthMan = match.Team1.TwelfthMan;
 
                 uow.Complete();
             }
@@ -58,8 +62,7 @@ namespace DDDIntro.IntegrationTests.Persistence
             var retrievedMatch = GetRepository<Match>().GetById(matchID);
             var retrievedTeam = retrievedMatch.Team1;
             retrievedTeam.Should().NotBeNull();
-            retrievedTeam.Country.Should().Be(country);
-            retrievedTeam.TwelfthMan.Should().Be(twelfthMan);
+            retrievedTeam.Country.Should().Be(nzl);
             retrievedTeam.Members.ElementAt(0).Should().Be(player1);
         }
 
