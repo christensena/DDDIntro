@@ -29,15 +29,18 @@ namespace DDDIntro.Domain
         {
             get { return innings.ToArray(); }
         }
-
-        public Match(DateTime date, Country team1Country, Country team2Country)
+        
+        // factory method example. this one could have been normal constructor
+        public static Match Create(DateTime date, Country team1Country, Country team2Country)
         {
             if (team1Country == null) throw new ArgumentNullException("team1Country");
             if (team2Country == null) throw new ArgumentNullException("team2Country");
             if (team1Country.Equals(team2Country)) throw new ArgumentException("Teams must not be the same country!");
-            Date = date;
-            teams.Add(new Team(this, team1Country));
-            teams.Add(new Team(this, team2Country));
+
+            var match = new Match { Date = date };
+            match.teams.Add(new Team(match, team1Country));
+            match.teams.Add(new Team(match, team2Country));
+            return match;
         }
 
         // for NH rehydration only

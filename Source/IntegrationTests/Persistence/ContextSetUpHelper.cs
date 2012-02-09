@@ -84,7 +84,7 @@ namespace DDDIntro.IntegrationTests.Persistence
 
             using (var uow = unitOfWorkFactory.BeginUnitOfWork())
             {
-                var match = new Match(DateTime.Today, country1, country2);
+                var match = Match.Create(DateTime.Today, country1, country2);
 
                 PickTeam(match.Team1, uow);
                 PickTeam(match.Team2, uow);

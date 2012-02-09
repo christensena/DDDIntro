@@ -33,7 +33,7 @@ namespace DDDIntro.IntegrationTests.Persistence
 
             using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                var match = new Match(DateTime.Today, nzl, saf);
+                var match = Match.Create(DateTime.Today, nzl, saf);
                 uow.Add(match);
 
                 uow.Complete();

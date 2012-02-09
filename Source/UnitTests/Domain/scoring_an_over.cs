@@ -14,7 +14,7 @@ namespace DDDIntro.UnitTests.Domain
                 var australia = new Country("Australia").WithId(1);
                 var england = new Country("England").WithId(2);
 
-                var match = new Match(DateTime.Today, australia, england);
+                var match = Match.Create(DateTime.Today, australia, england);
 
                 var team1 = match.Team1.WithId(1);
                 team1.AddMember(new Player("Matthew", "Hayden", australia).WithId(1));
