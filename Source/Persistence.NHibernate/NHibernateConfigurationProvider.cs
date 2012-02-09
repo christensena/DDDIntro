@@ -34,6 +34,8 @@ namespace DDDIntro.Persistence.NHibernate
             // see http://www.tigraine.at/2009/05/29/fluent-nhibernate-gotchas-when-testing-with-an-in-memory-database/
             if (File.Exists(SqlLiteDbFilename))
                 File.Delete(SqlLiteDbFilename);
+
+            // run ddl scripts on the database to create our test schema
             new SchemaExport(configuration).Create(script => System.Diagnostics.Debug.WriteLine(script), true);
         }
     }

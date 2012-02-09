@@ -28,8 +28,8 @@ namespace DDDIntro.Domain
 
         public virtual void AddMember(Player player)
         {
+            if (IsPlayerAlreadyInTeam(player)) throw new ArgumentException("Player is already in the team!");
             if (IsTeamComplete()) throw new InvalidOperationException("Maximum of 11 players in a team, plus 12th man");
-            if (IsPlayerAlreadyInTeam(player)) throw new InvalidOperationException("Player is already in the team!");
 
             if (members.Count < 11)
             {
