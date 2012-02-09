@@ -41,10 +41,10 @@ namespace DDDIntro.IntegrationTests.Persistence
             }
         }
      
-        public void PickTeam(Team team, IAggregateRepository aggregateRepository)
+        public void PickTeam(Team team, IUniversalRepository universalRepository)
         {
             var countryName = team.Country.Name;
-            var playersForCountry = aggregateRepository.GetAll<Player>().Where(p => p.Country.Name.Equals(countryName));
+            var playersForCountry = universalRepository.GetAll<Player>().Where(p => p.Country.Name.Equals(countryName));
 
             var random = new Random();
             var availablePlayers = playersForCountry.ToList();

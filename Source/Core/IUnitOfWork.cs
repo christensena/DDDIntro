@@ -2,7 +2,7 @@
 
 namespace DDDIntro.Core
 {
-    public interface IUnitOfWork : IAggregateRepository, IDisposable
+    public interface IUnitOfWork : IUniversalRepository, IDisposable
     {
         void Complete();
     }

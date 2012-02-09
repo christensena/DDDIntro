@@ -2,7 +2,7 @@
 
 namespace DDDIntro.Core
 {
-    public interface IAggregateRepository
+    public interface IUniversalRepository
     {
         TEntity GetById<TEntity>(int id) where TEntity : class;
 
