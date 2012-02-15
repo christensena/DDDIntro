@@ -1,12 +1,13 @@
-﻿using System.IO;
+﻿using System.Configuration;
+using System.IO;
 using DDDIntro.Domain;
 using DDDIntro.Persistence.NHibernate.MappingConventions;
 using DDDIntro.Persistence.NHibernate.MappingOverrides;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace DDDIntro.Persistence.NHibernate
 {
@@ -14,20 +15,13 @@ namespace DDDIntro.Persistence.NHibernate
     {
         private const string SqlLiteDbFilename = "tmpdb.db";
 
-        public static Configuration GetTempDatabaseConfiguration()
+        public static Configuration GetDatabaseConfiguration()
         {
-            return Fluently.Configure()
-                .Database(SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename).ShowSql())
-                //.Database(SQLiteConfiguration.Standard.InMemory())
-                .Mappings(m => m.AutoMappings.Add(
-                    AutoMap.AssemblyOf<Player>(new DefaultMappingConfiguration())
-                    .Conventions.AddFromAssemblyOf<IdGenerationConvention>()
-                     .UseOverridesFromAssemblyOf<OverMappingOverride>()))
-                .ExposeConfiguration(BuildDatabase)
-                .BuildConfiguration();
+            return GetDatabaseConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(
+                ConfigurationManager.ConnectionStrings["Default"].ConnectionString), true);
         }
 
-        private static void BuildDatabase(Configuration configuration)
+        public static Configuration GetTempDatabaseConfiguration()
         {
             // TODO: problem is that the in-memory database is recreated each session
             // so just going to use a temporary file system one instead
@@ -35,6 +29,31 @@ namespace DDDIntro.Persistence.NHibernate
             if (File.Exists(SqlLiteDbFilename))
                 File.Delete(SqlLiteDbFilename);
 
+            var databaseDriver = SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename).ShowSql();
+            return GetDatabaseConfiguration(databaseDriver, true);
+        }
+
+        public static Configuration GetDatabaseConfiguration(IPersistenceConfigurer databaseDriver, bool buildDatabase)
+        {
+            var fluentConfiguration =  
+                Fluently.Configure()
+                .Database(databaseDriver)
+                //.Database(SQLiteConfiguration.Standard.InMemory())
+                .Mappings(m => m.AutoMappings.Add(
+                    AutoMap.AssemblyOf<Player>(new DefaultMappingConfiguration())
+                    .Conventions.AddFromAssemblyOf<IdGenerationConvention>()
+                     .UseOverridesFromAssemblyOf<OverMappingOverride>()));
+
+            if (buildDatabase)
+            {
+                fluentConfiguration.ExposeConfiguration(BuildDatabase);
+            }
+
+            return fluentConfiguration.BuildConfiguration();
+        }
+
+        private static void BuildDatabase(Configuration configuration)
+        {
             // run ddl scripts on the database to create our test schema
             new SchemaExport(configuration).Create(script => System.Diagnostics.Debug.WriteLine(script), true);
         }
