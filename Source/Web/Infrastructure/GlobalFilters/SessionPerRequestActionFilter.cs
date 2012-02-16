@@ -1,39 +1,34 @@
 using System;
 using System.Web.Mvc;
-using NHibernate;
+using DDDIntro.Core;
 
 namespace DDDIntro.Web.Infrastructure.GlobalFilters
 {
     public class SessionPerRequestActionFilter : IActionFilter
     {
-        private readonly Func<ISession> sessionProvider;
-        private ISession session;
-        private ITransaction transaction;
+        private readonly Func<IUnitOfWorkFactory> unitOfWorkFactoryProvider;
+        private IUnitOfWork unitOfWork;
 
-        public SessionPerRequestActionFilter(Func<ISession> sessionProvider)
+        public SessionPerRequestActionFilter(Func<ISessionSharingUnitOfWorkFactory> unitOfWorkFactoryProvider)
         {
-            if (sessionProvider == null) throw new ArgumentNullException("sessionProvider");
-            this.sessionProvider = sessionProvider;
+            if (unitOfWorkFactoryProvider == null) throw new ArgumentNullException("unitOfWorkFactoryProvider");
+            this.unitOfWorkFactoryProvider = unitOfWorkFactoryProvider;
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            session = sessionProvider.Invoke();
-            transaction = session.BeginTransaction();
+            var unitOfWorkFactory = unitOfWorkFactoryProvider.Invoke();
+            unitOfWork = unitOfWorkFactory.BeginUnitOfWork();
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            try
+            if (filterContext.Exception == null)
             {
-                if (transaction.IsActive)
-                    transaction.Commit();
+                unitOfWork.Complete();
             }
-            finally
-            {
-                transaction.Dispose();
-                session.Dispose();
-            }
+
+            unitOfWork.Dispose();
         }
     }
 }

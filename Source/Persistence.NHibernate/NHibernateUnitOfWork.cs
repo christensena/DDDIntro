@@ -58,12 +58,19 @@ namespace DDDIntro.Persistence.NHibernate
 
         public void Dispose()
         {
-            if (transaction.IsActive)
-                transaction.Rollback();
-
-            if (! sessionWasProvided)
+            try
             {
-                session.Dispose();
+                if (transaction.IsActive)
+                    transaction.Rollback();
+            }
+            finally
+            {
+                transaction.Dispose();
+
+                if (!sessionWasProvided)
+                {
+                    session.Dispose();
+                }
             }
         }
     }

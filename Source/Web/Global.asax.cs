@@ -2,6 +2,7 @@
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using DDDIntro.Core;
 using DDDIntro.Web.Infrastructure;
 using DDDIntro.Web.Infrastructure.GlobalFilters;
 using FluentValidation.Mvc;
@@ -17,7 +18,7 @@ namespace DDDIntro.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new SessionPerRequestActionFilter(() => container.Resolve<ISession>()));
+            filters.Add(new SessionPerRequestActionFilter(() => container.Resolve<ISessionSharingUnitOfWorkFactory>()));
         }
 
         public static void RegisterRoutes(RouteCollection routes)
