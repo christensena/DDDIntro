@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Persistence\ContextSetUpHelper.cs" />
+    <Compile Include="Persistence\GeneralPersistence.cs" />
     <Compile Include="Persistence\MatchPersistence.cs" />
     <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />
     <Compile Include="Persistence\TeamPersistence.cs" />

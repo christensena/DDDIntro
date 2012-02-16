@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using DDDIntro.Application.Services;
 using DDDIntro.Core;
 using DDDIntro.Persistence.NHibernate;
 using FluentValidation;
@@ -32,6 +33,11 @@ namespace DDDIntro.Web.Infrastructure
                 Classes.FromThisAssembly()
                 .BasedOn(typeof(IValidator<>))
                 .WithServiceBase()
+                .LifestyleTransient());
+
+            container.Register(
+                Classes.FromAssemblyContaining<TestDataGenerator>()
+                .Pick() // filter by namespace or something later
                 .LifestyleTransient());
         }
     }

@@ -10,3 +10,11 @@
 <ul>
     <li>@Html.ActionLink("Countries", "Index", "Country")</li>
 </ul>
+
+<ul>
+    <li>
+        @using (Html.BeginForm("Generate", "TestData", FormMethod.Post)) {
+            <input type="submit" value="Generate Test Data" />
+        }
+    </li>
+</ul>

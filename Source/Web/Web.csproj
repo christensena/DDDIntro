@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +187,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application.Services\Application.Services.csproj">
+      <Project>{9CA9EBAA-1775-4301-84B3-DB0F7BEEDC40}</Project>
+      <Name>Application.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
       <Name>Core</Name>
