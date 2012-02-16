@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DDDIntro.Core;
 using DDDIntro.Domain;
@@ -29,7 +26,8 @@ namespace DDDIntro.Web.Controllers
             // TODO: use automapper here
             foreach (var country in countries)
             {
-                viewModel.Countries.Add(new CountryViewModel {Id = country.Id, Name = country.Name});
+                var countryViewModel = new CountryViewModel {Id = country.Id, Name = country.Name};
+                viewModel.Countries.Add(countryViewModel);
             }
 
             return View(viewModel);
@@ -50,68 +48,27 @@ namespace DDDIntro.Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateCountryViewModel viewModel)
         {
-            try
-            {
-                repository.Add(new Country(viewModel.Name));
+            if (!ModelState.IsValid)
+                return View(viewModel);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            repository.Add(new Country(viewModel.Name));
+
+            return RedirectToAction("Index");
         }
         
-        //
-        // GET: /Country/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Country/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Country/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         //
         // POST: /Country/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var country = repository.GetById(id);
+            if (country == null)
+                return HttpNotFound();
+
+            repository.Remove(country);
  
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }
