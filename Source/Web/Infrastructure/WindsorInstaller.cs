@@ -5,6 +5,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DDDIntro.Core;
 using DDDIntro.Persistence.NHibernate;
+using FluentValidation;
 using NHibernate;
 
 namespace DDDIntro.Web.Infrastructure
@@ -26,6 +27,12 @@ namespace DDDIntro.Web.Infrastructure
             container.Register(Classes.FromThisAssembly()
                             .BasedOn<IController>()
                             .LifestyleTransient());
+
+            container.Register(
+                Classes.FromThisAssembly()
+                .BasedOn(typeof(IValidator<>))
+                .WithServiceBase()
+                .LifestyleTransient());
         }
     }
 }

@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using DDDIntro.Web.Infrastructure;
 using DDDIntro.Web.Infrastructure.GlobalFilters;
+using FluentValidation.Mvc;
 using NHibernate;
 
 namespace DDDIntro.Web
@@ -39,6 +40,11 @@ namespace DDDIntro.Web
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            FluentValidationModelValidatorProvider.Configure(provider =>
+                {
+                    provider.ValidatorFactory = new WindsorValidatorFactory(container);
+                });
         }
 
         protected void Application_End()

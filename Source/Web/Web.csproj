@@ -119,10 +119,12 @@
     <Compile Include="Infrastructure\GlobalFilters\SessionPerRequestActionFilter.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\WindsorInstaller.cs" />
+    <Compile Include="Infrastructure\WindsorValidatorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CountryIndexViewModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\CreateCountryViewModel.cs" />
+    <Compile Include="ViewModels\Validation\CreateCountryViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
