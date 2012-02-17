@@ -39,7 +39,11 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\RecordDeliveryCommandHandler.cs" />
     <Compile Include="ICommandHandler.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\PlayersForCountryQuery.cs" />
+    <Compile Include="QueryHandlers\PlayersForCountryQueryHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

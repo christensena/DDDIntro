@@ -106,14 +106,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandling\CommandHandlingTestSuiteBase.cs" />
-    <Compile Include="CommandHandling\DeliveryRecording.cs" />
+    <Compile Include="Services\CommandHandling\DeliveryRecording.cs" />
     <Compile Include="ContextSetUpHelper.cs" />
     <Compile Include="Persistence\GeneralPersistence.cs" />
     <Compile Include="Persistence\MatchPersistence.cs" />
     <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />
     <Compile Include="Persistence\TeamPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\QueryHandling\PlayersForCountry.cs" />
     <Compile Include="Services\ServiceTestSuiteBase.cs" />
   </ItemGroup>
   <ItemGroup>
