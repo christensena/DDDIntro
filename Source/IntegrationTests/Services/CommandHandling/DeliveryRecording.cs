@@ -1,17 +1,14 @@
-using System;
 using System.Linq;
-using System.Collections.Generic;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Commands;
 using DDDIntro.Domain.Services.CommandHandlers;
-using DDDIntro.IntegrationTests.Persistence;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DDDIntro.IntegrationTests.CommandHandling
+namespace DDDIntro.IntegrationTests.Services.CommandHandling
 {
     [TestFixture]
-    public class DeliveryRecording : CommandHandlingTestSuiteBase
+    public class DeliveryRecording : ServiceTestSuiteBase
     {
         private ContextSetUpHelper setUpHelper;
 
@@ -32,10 +29,7 @@ namespace DDDIntro.IntegrationTests.CommandHandling
             StartFirstOver(matchId);
 
             var match = GetRepository<Match>().GetById(matchId);
-            var currentTeamInnings = match.Innings.Last();
-            var batterInnings = currentTeamInnings.BatterInnings.First(x => x.NotOut);
-
-            var command = new RecordDeliveryCommand(match.Id, batterInnings.Batter.Id, runsToBeScored);
+            var command = new RecordDeliveryCommand(match.Id, runsToBeScored);
 
             // Act
             var commandHandler = new RecordDeliveryCommandHandler(UnitOfWorkFactory);

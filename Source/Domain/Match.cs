@@ -69,5 +69,21 @@ namespace DDDIntro.Domain
 
             return teamInnings;
         }
+
+        public virtual void RecordDelivery(int runsScored)
+        {
+            var teamInnings = GetCurrentInnings();
+            var currentOver = teamInnings.GetCurrentOver();
+            // TODO: implement CurrentBatterInnings
+            var facingBatter = teamInnings.BatterInnings.Last().Batter; 
+            currentOver.RecordDelivery(facingBatter, runsScored);
+        }
+
+        public virtual TeamInnings GetCurrentInnings()
+        {
+            if (! Innings.Any()) throw new InvalidOperationException("No innings commenced!");
+
+            return Innings.Last();
+        }
     }
 }
