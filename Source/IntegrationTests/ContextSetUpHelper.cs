@@ -3,7 +3,7 @@ using System.Linq;
 using DDDIntro.Core;
 using DDDIntro.Domain;
 
-namespace DDDIntro.IntegrationTests.Persistence
+namespace DDDIntro.IntegrationTests
 {
     public class ContextSetUpHelper
     {
@@ -77,6 +77,11 @@ namespace DDDIntro.IntegrationTests.Persistence
             return SetUpPlayer(randomGenerator.GetRandomString(), randomGenerator.GetRandomString(), countryName);
         }
 
+        public int SetUpMatch()
+        {
+            return SetUpMatch(SetUpCountry("New Zealand"), SetUpCountry("South Africa"));
+        }
+
         public int SetUpMatch(Country country1, Country country2)
         {
             PopulateCountryPlayerPool(country1.Name);
@@ -96,6 +101,8 @@ namespace DDDIntro.IntegrationTests.Persistence
                 return match.Id;
             }
         }
+
+
         private class RandomsGenerator
         {
             private readonly Random random = new Random();

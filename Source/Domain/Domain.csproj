@@ -68,6 +68,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\RecordDeliveryCommand.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="BowlingSpell.cs" />
     <Compile Include="Match.cs" />

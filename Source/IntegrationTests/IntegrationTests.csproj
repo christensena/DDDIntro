@@ -106,7 +106,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Persistence\ContextSetUpHelper.cs" />
+    <Compile Include="CommandHandling\CommandHandlingTestSuiteBase.cs" />
+    <Compile Include="CommandHandling\DeliveryRecording.cs" />
+    <Compile Include="ContextSetUpHelper.cs" />
     <Compile Include="Persistence\GeneralPersistence.cs" />
     <Compile Include="Persistence\MatchPersistence.cs" />
     <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />

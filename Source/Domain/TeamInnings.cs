@@ -30,6 +30,8 @@ namespace DDDIntro.Domain
             get { return bowlingSpells.ToArray(); }
         }
 
+        //public virtual Player FacingBatter { get; private set; }
+
         internal TeamInnings(Team battingTeam, Team fieldingTeam)
         {
             BattingTeam = battingTeam;
@@ -71,6 +73,23 @@ namespace DDDIntro.Domain
             GetBowlingSpell(bowler).RecordOverCommenced(over);
 
             return over;
+        }
+
+        //public virtual Player GetFacingBatsman()
+        //{
+        //    if (! batterInnings.Any()) throw new InvalidOperationException("No innings commenced!");
+        //    if (batterInnings.Count(x => x.NotOut) <= 1) throw new InvalidOperationException("10 wickets down. No batsman to face");
+
+
+        //}
+
+        public virtual Over GetCurrentOver()
+        {
+            if (! overs.Any()) throw new InvalidOperationException("No overs!");
+            var lastOver = overs.Last();
+            if (lastOver.IsOver()) throw new InvalidOperationException("Last over completed. Need to start a new over.");
+
+            return lastOver;
         }
 
         public virtual int GetScore()
