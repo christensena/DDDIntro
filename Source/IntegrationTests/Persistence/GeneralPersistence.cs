@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using DDDIntro.Domain;
 using FluentAssertions;
 using NUnit.Framework;
@@ -11,7 +9,7 @@ namespace DDDIntro.IntegrationTests.Persistence
     public class GeneralPersistence : PersistenceTestSuiteBase
     {
         [Test]
-        public void BeginUnitOfWork_ExceptionOccursInScope_ChangesNotSaved()
+        public void BeginUnitOfWork_EntityAdded_ExceptionOccursInScope_EntityShouldNotBePersisted()
         {
             // Act
             try
@@ -31,5 +29,21 @@ namespace DDDIntro.IntegrationTests.Persistence
             GetRepository<Country>().FindAll().Should().BeEmpty();
         }
 
+        [Test]
+        public void BeginUnitOfWork_NoExceptionsEntityAdded_EntityShouldBePersisted()
+        {
+            // Arrange
+
+            // Act
+            using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
+            {
+                uow.Add(new Country("Test"));
+
+                uow.Complete();
+            }
+
+            // Assert
+            GetRepository<Country>().FindAll().Should().NotBeEmpty();
+        }
     }
 }
