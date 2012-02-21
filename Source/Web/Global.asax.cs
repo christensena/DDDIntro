@@ -6,7 +6,6 @@ using DDDIntro.Core;
 using DDDIntro.Web.Infrastructure;
 using DDDIntro.Web.Infrastructure.GlobalFilters;
 using FluentValidation.Mvc;
-using NHibernate;
 
 namespace DDDIntro.Web
 {
@@ -37,6 +36,7 @@ namespace DDDIntro.Web
         {
             AreaRegistration.RegisterAllAreas();
 
+            // should put all this in a bootstrapper class or something
             container = BootstrapContainer();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
@@ -46,6 +46,8 @@ namespace DDDIntro.Web
                 {
                     provider.ValidatorFactory = new WindsorValidatorFactory(container);
                 });
+
+            AutoMapperConfiguration.Configure();
         }
 
         protected void Application_End()

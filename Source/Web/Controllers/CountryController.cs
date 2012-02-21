@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.Factories;
@@ -20,15 +21,9 @@ namespace DDDIntro.Web.Controllers
 
         public ActionResult Index()
         {
-            var viewModel = new CountryIndexViewModel();
-
             var countries = repository.FindAll().ToArray();
-            // TODO: use automapper here
-            foreach (var country in countries)
-            {
-                var countryViewModel = new CountryViewModel {Id = country.Id, Name = country.Name};
-                viewModel.Countries.Add(countryViewModel);
-            }
+
+            var viewModel = Mapper.Map<CountryIndexViewModel>(countries);
 
             return View(viewModel);
         }
@@ -51,6 +46,7 @@ namespace DDDIntro.Web.Controllers
             return RedirectToAction("Index");
         }
         
+//        [HttpDelete]
         [HttpPost]
         public ActionResult Delete(int id)
         {
