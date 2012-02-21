@@ -1,10 +1,10 @@
 ﻿namespace DDDIntro.Domain.Abstract
 {
-    public abstract class Entity
+    public abstract class EntityWithGeneratedId
     {
         public virtual int Id { get; private set; }
 
-        public virtual bool Equals(Entity other)
+        public virtual bool Equals(EntityWithGeneratedId other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -16,7 +16,7 @@
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((Entity)obj);
+            return Equals((EntityWithGeneratedId)obj);
         }
 
         public override int GetHashCode()

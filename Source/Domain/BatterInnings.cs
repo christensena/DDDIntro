@@ -3,7 +3,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class BatterInnings : Entity
+    public class BatterInnings : EntityWithGeneratedId
     {
         public virtual TeamInnings TeamInnings { get; private set; }
 

@@ -5,7 +5,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class Over : Entity
+    public class Over : EntityWithGeneratedId
     {
         private IList<Delivery> deliveries = new List<Delivery>();
 

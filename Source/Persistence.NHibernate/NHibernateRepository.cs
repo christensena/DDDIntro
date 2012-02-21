@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using DDDIntro.Core;
+using DDDIntro.Domain.Abstract;
 using NHibernate;
 using NHibernate.Linq;
 
 namespace DDDIntro.Persistence.NHibernate
 {
-    public class NHibernateRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class NHibernateRepository<TEntity> : IRepository<TEntity> where TEntity : class, IAggregateRoot
     {
         private readonly ISession session;
 

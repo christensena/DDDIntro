@@ -1,7 +1,7 @@
 using System.Linq;
 using DDDIntro.Domain;
-using DDDIntro.Domain.Commands;
 using DDDIntro.Domain.Services.CommandHandlers;
+using DDDIntro.Domain.Services.Commands;
 using FluentAssertions;
 using NUnit.Framework;
 

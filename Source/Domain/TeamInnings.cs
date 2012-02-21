@@ -5,7 +5,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class TeamInnings : Entity
+    public class TeamInnings : EntityWithGeneratedId
     {
         private IList<Over> overs = new List<Over>();
         private IList<BatterInnings> batterInnings = new List<BatterInnings>();

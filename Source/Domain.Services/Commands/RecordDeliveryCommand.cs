@@ -1,4 +1,4 @@
-namespace DDDIntro.Domain.Commands
+﻿namespace DDDIntro.Domain.Services.Commands
 {
     public class RecordDeliveryCommand : ICommand
     {

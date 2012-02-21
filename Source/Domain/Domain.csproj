@@ -68,13 +68,12 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\RecordDeliveryCommand.cs" />
+    <Compile Include="Abstract\IAggregateRoot.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="BowlingSpell.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="Abstract\Entity.cs" />
+    <Compile Include="Abstract\EntityWithGeneratedId.cs" />
     <Compile Include="Over.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="BatterInnings.cs" />

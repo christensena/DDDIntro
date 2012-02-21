@@ -5,7 +5,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class Team : Entity
+    public class Team : EntityWithGeneratedId
     {
         private IList<Player> members = new List<Player>();
 

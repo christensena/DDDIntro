@@ -5,8 +5,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    // Match is an aggregate root
-    public class Match : Entity
+    public class Match : EntityWithGeneratedId, IAggregateRoot
     {
         private IList<TeamInnings> innings = new List<TeamInnings>();
         private IList<Team> teams = new List<Team>();

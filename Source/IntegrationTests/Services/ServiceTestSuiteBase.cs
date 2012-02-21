@@ -1,5 +1,5 @@
 using DDDIntro.Core;
-
+using DDDIntro.Domain.Abstract;
 using DDDIntro.Persistence.NHibernate;
 using NHibernate;
 using NUnit.Framework;
@@ -17,7 +17,7 @@ namespace DDDIntro.IntegrationTests.Services
             get { return unitOfWorkFactory; }
         }
 
-        protected IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
+        protected IRepository<TEntity> GetRepository<TEntity>() where TEntity : class, IAggregateRoot
         {
             return new NHibernateRepository<TEntity>(repositorySession);
         }

@@ -1,8 +1,9 @@
 using System.Linq;
+using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Core
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class, IAggregateRoot
     {
         TEntity GetById(int id);
 

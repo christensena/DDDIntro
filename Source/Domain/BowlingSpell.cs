@@ -5,7 +5,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class BowlingSpell : Entity
+    public class BowlingSpell : EntityWithGeneratedId
     {
         private IList<Over> overs = new List<Over>();
 

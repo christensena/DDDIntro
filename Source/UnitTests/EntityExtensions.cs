@@ -6,7 +6,7 @@ namespace DDDIntro.UnitTests
 {
     public static class EntityExtensions
     {
-        public static TEntity WithId<TEntity>(this TEntity obj, int id) where TEntity : class
+        public static TEntity WithId<TEntity>(this TEntity obj, int id) where TEntity : EntityWithGeneratedId
         {
             var fieldInfo = typeof(TEntity)
                 .GetField("id", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -16,7 +16,7 @@ namespace DDDIntro.UnitTests
             }
             else
             {
-                var propertyInfo = typeof (Entity).GetProperty("Id");
+                var propertyInfo = typeof (EntityWithGeneratedId).GetProperty("Id");
                 if (propertyInfo == null)
                 {
                     throw new ArgumentException("No field named 'id' or property named 'Id' found on object of type: " + typeof (TEntity).FullName);

@@ -3,7 +3,7 @@ using DDDIntro.Domain.Abstract;
 
 namespace DDDIntro.Domain
 {
-    public class Player : Entity
+    public class Player : EntityWithGeneratedId, IAggregateRoot
     {
         public virtual string FirstName { get; private set; }
 

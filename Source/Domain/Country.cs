@@ -2,7 +2,7 @@
 
 namespace DDDIntro.Domain
 {
-    public class Country : Entity
+    public class Country : EntityWithGeneratedId, IAggregateRoot
     {
         public virtual string Name { get; private set; }
 

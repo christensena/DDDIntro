@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DDDIntro.Core;
+using DDDIntro.Domain.Abstract;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -29,23 +30,23 @@ namespace DDDIntro.Persistence.NHibernate
             sessionWasProvided = true;
         }
 
-        public TEntity GetById<TEntity>(int id) where TEntity : class
+        public TEntity GetById<TEntity>(int id) where TEntity : class, IAggregateRoot
         {
             return session.Get<TEntity>(id);
         }
 
-        public IQueryable<TEntity> FindAll<TEntity>() where TEntity : class
+        public IQueryable<TEntity> FindAll<TEntity>() where TEntity : class, IAggregateRoot
         {
             return session.Query<TEntity>();
         }
 
-        public void Add<TEntity>(TEntity entity) where TEntity : class
+        public void Add<TEntity>(TEntity entity) where TEntity : class, IAggregateRoot
         {
             if (entity == null) throw new ArgumentNullException("entity");
             session.Save(entity);
         }
 
-        public void Remove<TEntity>(TEntity entity) where TEntity : class
+        public void Remove<TEntity>(TEntity entity) where TEntity : class, IAggregateRoot
         {
             if (entity == null) throw new ArgumentNullException("entity");
             session.Delete(entity);
