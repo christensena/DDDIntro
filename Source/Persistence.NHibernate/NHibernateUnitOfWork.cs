@@ -34,7 +34,7 @@ namespace DDDIntro.Persistence.NHibernate
             return session.Get<TEntity>(id);
         }
 
-        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class
+        public IQueryable<TEntity> FindAll<TEntity>() where TEntity : class
         {
             return session.Query<TEntity>();
         }

@@ -1,16 +1,19 @@
 using System.Linq;
 using DDDIntro.Core;
 using DDDIntro.Domain;
+using DDDIntro.Domain.Services.Factories;
 
 namespace DDDIntro.Application.Services
 {
     public class TestDataGenerator
     {
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
+        private readonly CountryFactory countryFactory;
 
-        public TestDataGenerator(IUnitOfWorkFactory unitOfWorkFactory)
+        public TestDataGenerator(IUnitOfWorkFactory unitOfWorkFactory, CountryFactory countryFactory)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
+            this.countryFactory = countryFactory;
         }
 
         public void GenerateTestData()
@@ -23,16 +26,16 @@ namespace DDDIntro.Application.Services
         {
             using (var unitOfWork = unitOfWorkFactory.BeginUnitOfWork())
             {
-                unitOfWork.Add(new Country("New Zealand"));
-                unitOfWork.Add(new Country("Australia"));
-                unitOfWork.Add(new Country("South Africa"));
-                unitOfWork.Add(new Country("India"));
-                unitOfWork.Add(new Country("England"));
-                unitOfWork.Add(new Country("West Indies"));
-                unitOfWork.Add(new Country("Sri Lanka"));
-                unitOfWork.Add(new Country("Pakistan"));
-                unitOfWork.Add(new Country("Bangladesh"));
-                unitOfWork.Add(new Country("Zimbabwe"));
+                unitOfWork.Add(countryFactory.CreateCountry("New Zealand"));
+                unitOfWork.Add(countryFactory.CreateCountry("Australia"));
+                unitOfWork.Add(countryFactory.CreateCountry("South Africa"));
+                unitOfWork.Add(countryFactory.CreateCountry("India"));
+                unitOfWork.Add(countryFactory.CreateCountry("England"));
+                unitOfWork.Add(countryFactory.CreateCountry("West Indies"));
+                unitOfWork.Add(countryFactory.CreateCountry("Sri Lanka"));
+                unitOfWork.Add(countryFactory.CreateCountry("Pakistan"));
+                unitOfWork.Add(countryFactory.CreateCountry("Bangladesh"));
+                unitOfWork.Add(countryFactory.CreateCountry("Zimbabwe"));
 
                 unitOfWork.Complete();
             }
@@ -42,7 +45,7 @@ namespace DDDIntro.Application.Services
         {
             using (var unitOfWork = unitOfWorkFactory.BeginUnitOfWork())
             {
-                var nzl = unitOfWork.GetAll<Country>().SingleOrDefault(c => c.Name == "New Zealand");
+                var nzl = unitOfWork.FindAll<Country>().SingleOrDefault(c => c.Name == "New Zealand");
 
                 unitOfWork.Add(new Player("Brendan", "McCullum", nzl));
                 unitOfWork.Add(new Player("Martin", "Guptil", nzl));

@@ -7,6 +7,7 @@ using DDDIntro.Application.Services;
 using DDDIntro.Core;
 using DDDIntro.Domain.Services;
 using DDDIntro.Domain.Services.CommandHandlers;
+using DDDIntro.Domain.Services.Factories;
 using DDDIntro.Domain.Services.QueryHandlers;
 using DDDIntro.Persistence.NHibernate;
 using FluentValidation;
@@ -39,7 +40,6 @@ namespace DDDIntro.Web.Infrastructure
                 Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => NHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton(),
                 Component.For<ISessionFactory>().UsingFactoryMethod(ctx => ctx.Resolve<NHibernate.Cfg.Configuration>().BuildSessionFactory()).LifestyleSingleton(),
                 Component.For<ISession>().UsingFactoryMethod(ctx => ctx.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
-            
 
             container.Register(
                 Component.For(typeof (IRepository<>)).ImplementedBy(typeof (NHibernateRepository<>)).LifestylePerWebRequest(),
@@ -55,6 +55,9 @@ namespace DDDIntro.Web.Infrastructure
                     .LifestyleTransient(),
                 Classes.FromAssemblyContaining<PlayersForCountryQueryHandler>()
                     .BasedOn(typeof (IQueryHandler<,>)).WithServiceBase()
+                    .LifestyleTransient(),
+                Classes.FromAssemblyContaining<CountryFactory>()
+                    .BasedOn(typeof(IEntityFactory)).WithServiceSelf()
                     .LifestyleTransient());
 
             container.Register(

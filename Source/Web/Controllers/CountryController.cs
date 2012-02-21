@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using DDDIntro.Core;
 using DDDIntro.Domain;
+using DDDIntro.Domain.Services.Factories;
 using DDDIntro.Web.ViewModels;
 
 namespace DDDIntro.Web.Controllers
@@ -9,14 +10,13 @@ namespace DDDIntro.Web.Controllers
     public class CountryController : Controller
     {
         private readonly IRepository<Country> repository;
+        private readonly CountryFactory countryFactory;
 
-        public CountryController(IRepository<Country> repository)
+        public CountryController(IRepository<Country> repository, CountryFactory countryFactory)
         {
             this.repository = repository;
+            this.countryFactory = countryFactory;
         }
-
-        //
-        // GET: /Country/
 
         public ActionResult Index()
         {
@@ -33,17 +33,10 @@ namespace DDDIntro.Web.Controllers
             return View(viewModel);
         }
 
-
-        //
-        // GET: /Country/Create
-
         public ActionResult Create()
         {
             return View(new CreateCountryViewModel());
         } 
-
-        //
-        // POST: /Country/Create
 
         [HttpPost]
         public ActionResult Create(CreateCountryViewModel viewModel)
@@ -51,14 +44,13 @@ namespace DDDIntro.Web.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            repository.Add(new Country(viewModel.Name));
+            var country = countryFactory.CreateCountry(viewModel.Name);
+
+            repository.Add(country);
 
             return RedirectToAction("Index");
         }
         
-        //
-        // POST: /Country/Delete/5
-
         [HttpPost]
         public ActionResult Delete(int id)
         {

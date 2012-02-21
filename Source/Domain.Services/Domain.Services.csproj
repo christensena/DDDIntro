@@ -38,6 +38,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\RecordDeliveryCommandHandler.cs" />
+    <Compile Include="Factories\CountryFactory.cs" />
+    <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryHandler.cs" />

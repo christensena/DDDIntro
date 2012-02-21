@@ -6,7 +6,7 @@ namespace DDDIntro.Domain
     {
         public virtual string Name { get; private set; }
 
-        public Country(string name)
+        internal Country(string name)
         {
             Name = name;
         }
