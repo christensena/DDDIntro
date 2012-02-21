@@ -6,6 +6,9 @@ namespace DDDIntro.Domain
     {
         public virtual string Name { get; private set; }
 
+        /// <summary>
+        /// Use factory to create <see cref="Country"/> instances.
+        /// </summary>
         internal Country(string name)
         {
             Name = name;

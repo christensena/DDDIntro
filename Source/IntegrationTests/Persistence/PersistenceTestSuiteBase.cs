@@ -25,7 +25,7 @@ namespace DDDIntro.IntegrationTests.Persistence
         [TestFixtureSetUp]
         public void PersistenceTestSuiteBaseFixtureSetUp()
         {
-            var databaseConfiguration = NHibernateConfigurationProvider.GetTempDatabaseConfiguration();
+            var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
             sessionFactory = new SessionFactoryProvider(databaseConfiguration).GetSessionFactory();
             unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
         }
