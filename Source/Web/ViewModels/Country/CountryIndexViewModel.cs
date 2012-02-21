@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DDDIntro.Web.ViewModels
+namespace DDDIntro.Web.ViewModels.Country
 {
     public class CountryIndexViewModel
     {

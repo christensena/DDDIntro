@@ -1,4 +1,4 @@
-﻿namespace DDDIntro.Web.ViewModels
+﻿namespace DDDIntro.Web.ViewModels.Country
 {
     public class CountryViewModel
     {

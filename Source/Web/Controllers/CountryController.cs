@@ -4,10 +4,24 @@ using AutoMapper;
 using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.Factories;
-using DDDIntro.Web.ViewModels;
+using DDDIntro.Web.ViewModels.Country;
 
 namespace DDDIntro.Web.Controllers
 {
+    /// <summary>
+    /// This is an example of a lightweight controller that does it's
+    /// repository stuff directly.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This is basically CRUD.
+    /// More behavioural/complex scenarios would better suit query objects to read and commands to alter state.
+    /// </para>
+    /// <para>
+    /// This example also demonstrates more directly how session per request 
+    /// with collection-semantics repositories keeps things simple.
+    /// </para>
+    /// </remarks>
     public class CountryController : Controller
     {
         private readonly IRepository<Country> repository;
@@ -19,6 +33,7 @@ namespace DDDIntro.Web.Controllers
             this.countryFactory = countryFactory;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var countries = repository.FindAll().ToArray();
@@ -28,6 +43,7 @@ namespace DDDIntro.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new CreateCountryViewModel());

@@ -1,24 +1,23 @@
 using System.Linq;
 using DDDIntro.Core;
-using DDDIntro.Domain;
 using FluentValidation;
 
-namespace DDDIntro.Web.ViewModels.Validation
+namespace DDDIntro.Web.ViewModels.Country.Validation
 {
     /// <summary>
-    /// So we do our validation here. 
+    /// So we do our validation for creating a country here. 
     /// Invariants will be rudely enforced (exceptions) if we let nonsense through
     /// so we need to do validation.
     /// </summary>
     /// <remarks>
-    /// For those obsessed with DRY. Remember we are validating only the view model, not the whole domain model.
+    /// For those obsessed with DRY. Remember we are validating only the view model, not the whole entity.
     /// Stop thinking CRUD!
     /// </remarks>
     public class CreateCountryViewModelValidator : AbstractValidator<CreateCountryViewModel>
     {
-        private readonly IRepository<Country> repository;
+        private readonly IRepository<Domain.Country> repository;
 
-        public CreateCountryViewModelValidator(IRepository<Country> repository)
+        public CreateCountryViewModelValidator(IRepository<Domain.Country> repository)
         {
             this.repository = repository;
             RuleFor(x => x.Name).NotEmpty();

@@ -126,10 +126,10 @@
     <Compile Include="Infrastructure\WindsorInstaller.cs" />
     <Compile Include="Infrastructure\WindsorValidatorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CountryIndexViewModel.cs" />
-    <Compile Include="ViewModels\CountryViewModel.cs" />
-    <Compile Include="ViewModels\CreateCountryViewModel.cs" />
-    <Compile Include="ViewModels\Validation\CreateCountryViewModelValidator.cs" />
+    <Compile Include="ViewModels\Country\CountryIndexViewModel.cs" />
+    <Compile Include="ViewModels\Country\CountryViewModel.cs" />
+    <Compile Include="ViewModels\Country\CreateCountryViewModel.cs" />
+    <Compile Include="ViewModels\Country\Validation\CreateCountryViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
