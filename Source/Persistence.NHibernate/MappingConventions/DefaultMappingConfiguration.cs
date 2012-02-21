@@ -14,7 +14,7 @@ namespace DDDIntro.Persistence.NHibernate.MappingConventions
 
         public override bool IsComponent(Type type)
         {
-            return typeof(ValueObject).IsAssignableFrom(type);
+            return typeof(ValueObject).IsAssignableFrom(type) || typeof(ValueObject<>).IsAssignableFrom(type);
         }
     }
 }
