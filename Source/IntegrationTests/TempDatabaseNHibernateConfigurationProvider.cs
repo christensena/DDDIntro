@@ -2,6 +2,7 @@ using System.IO;
 using DDDIntro.Persistence.NHibernate;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace DDDIntro.IntegrationTests
 {
@@ -19,8 +20,12 @@ namespace DDDIntro.IntegrationTests
 
             //SQLiteConfiguration.Standard.InMemory()
             var databaseDriver = SQLiteConfiguration.Standard.UsingFile(SqlLiteDbFilename).ShowSql();
-            return NHibernateConfigurationProvider.GetDatabaseConfiguration(databaseDriver, true);
+            return NHibernateConfigurationProvider.GetDatabaseConfiguration(databaseDriver, ExportSchemaToDatabase);
         }
-        
+
+        private static void ExportSchemaToDatabase(Configuration configuration)
+        {
+            new SchemaExport(configuration).Create(script => System.Diagnostics.Debug.WriteLine(script), true);
+        }
     }
 }

@@ -10,6 +10,7 @@ using DDDIntro.Domain.Services.CommandHandlers;
 using DDDIntro.Domain.Services.Factories;
 using DDDIntro.Domain.Services.QueryHandlers;
 using DDDIntro.Persistence.NHibernate;
+using DDDIntro.Web.Infrastructure.Persistence;
 using FluentValidation;
 using NHibernate;
 
@@ -37,7 +38,7 @@ namespace DDDIntro.Web.Infrastructure
         private static void RegisterPersistenceComponents(IWindsorContainer container)
         {
             container.Register(
-                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => NHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton(),
+                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => SqlServerNHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton(),
                 Component.For<ISessionFactory>().UsingFactoryMethod(ctx => ctx.Resolve<NHibernate.Cfg.Configuration>().BuildSessionFactory()).LifestyleSingleton(),
                 Component.For<ISession>().UsingFactoryMethod(ctx => ctx.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
 

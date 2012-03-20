@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\GlobalFilters\SessionPerRequestActionFilter.cs" />
+    <Compile Include="Infrastructure\Persistence\SqlServerNHibernateConfigurationProvider.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\WindsorInstaller.cs" />
     <Compile Include="Infrastructure\WindsorValidatorFactory.cs" />
