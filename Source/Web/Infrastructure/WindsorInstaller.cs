@@ -56,6 +56,9 @@ namespace DDDIntro.Web.Infrastructure
                 Classes.FromAssemblyContaining<PlayersForCountryQueryHandler>()
                     .BasedOn(typeof (IQueryHandler<,>)).WithServiceBase()
                     .LifestyleTransient(),
+                Classes.FromAssemblyContaining<MatchesForPlayerQueryHandler>()
+                    .BasedOn(typeof(IQueryHandler<,>)).WithServiceBase()
+                    .LifestyleTransient(),
                 Classes.FromAssemblyContaining<CountryFactory>()
                     .BasedOn(typeof(IEntityFactory)).WithServiceSelf()
                     .LifestyleTransient());
