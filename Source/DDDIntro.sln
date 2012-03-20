@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{544644
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentRegistry", "ComponentRegistry\ComponentRegistry.csproj", "{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,12 @@ Global
 		{9CA9EBAA-1775-4301-84B3-DB0F7BEEDC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CA9EBAA-1775-4301-84B3-DB0F7BEEDC40}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CA9EBAA-1775-4301-84B3-DB0F7BEEDC40}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

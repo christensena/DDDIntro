@@ -198,6 +198,10 @@
       <Project>{9CA9EBAA-1775-4301-84B3-DB0F7BEEDC40}</Project>
       <Name>Application.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ComponentRegistry\ComponentRegistry.csproj">
+      <Project>{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}</Project>
+      <Name>ComponentRegistry</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
       <Name>Core</Name>

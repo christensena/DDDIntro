@@ -1,18 +1,10 @@
-using System;
 using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DDDIntro.Application.Services;
-using DDDIntro.Core;
-using DDDIntro.Domain.Services;
-using DDDIntro.Domain.Services.CommandHandlers;
-using DDDIntro.Domain.Services.Factories;
-using DDDIntro.Domain.Services.QueryHandlers;
-using DDDIntro.Persistence.NHibernate;
+using ComponentRegistry;
 using DDDIntro.Web.Infrastructure.Persistence;
 using FluentValidation;
-using NHibernate;
 
 namespace DDDIntro.Web.Infrastructure
 {
@@ -20,54 +12,25 @@ namespace DDDIntro.Web.Infrastructure
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            RegisterPersistenceComponents(container);
-            RegisterDomainServices(container);
+            container.AddFacility<PersistenceFacility>();
+            container.AddFacility<DomainServicesFacility>();
+            container.AddFacility<ApplicationServicesFacility>();
 
+            // we're using nhibernate against SQL Server here
+            container.Register(
+                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => SqlServerNHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton());
+
+            // register all Fluent Validators
             container.Register(
                 Classes.FromThisAssembly()
                 .BasedOn(typeof(IValidator<>))
                 .WithServiceBase()
                 .LifestyleTransient());
 
+            // register all controllers
             container.Register(Classes.FromThisAssembly()
                             .BasedOn<IController>()
                             .LifestyleTransient());
-
-        }
-
-        private static void RegisterPersistenceComponents(IWindsorContainer container)
-        {
-            container.Register(
-                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => SqlServerNHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton(),
-                Component.For<ISessionFactory>().UsingFactoryMethod(ctx => ctx.Resolve<NHibernate.Cfg.Configuration>().BuildSessionFactory()).LifestyleSingleton(),
-                Component.For<ISession>().UsingFactoryMethod(ctx => ctx.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
-
-            container.Register(
-                Component.For(typeof (IRepository<>)).ImplementedBy(typeof (NHibernateRepository<>)).LifestylePerWebRequest(),
-                Component.For<IUnitOfWorkFactory>().ImplementedBy<NHibernateUnitOfWorkFactory>().LifestyleSingleton(),
-                Component.For<ISessionSharingUnitOfWorkFactory>().ImplementedBy<SessionSharingNHibernateUnitOfWorkFactory>().LifestylePerWebRequest());
-        }
-
-        private static void RegisterDomainServices(IWindsorContainer container)
-        {
-            container.Register(
-                Classes.FromAssemblyContaining<RecordDeliveryCommandHandler>()
-                    .BasedOn(typeof (ICommandHandler<>)).WithServiceBase()
-                    .LifestyleTransient(),
-                Classes.FromAssemblyContaining<PlayersForCountryQueryHandler>()
-                    .BasedOn(typeof (IQueryHandler<,>)).WithServiceBase()
-                    .LifestyleTransient(),
-                Classes.FromAssemblyContaining<MatchesForPlayerQueryHandler>()
-                    .BasedOn(typeof(IQueryHandler<,>)).WithServiceBase()
-                    .LifestyleTransient(),
-                Classes.FromAssemblyContaining<CountryFactory>()
-                    .BasedOn(typeof(IEntityFactory)).WithServiceSelf()
-                    .LifestyleTransient());
-
-            container.Register(
-                Classes.FromAssemblyContaining<TestDataGenerator>()
-                    .Pick() // filter by namespace or something later
-                    .LifestyleTransient());
         }
     }
 }
