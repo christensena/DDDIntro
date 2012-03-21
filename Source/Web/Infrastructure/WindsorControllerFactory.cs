@@ -3,12 +3,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 
 namespace DDDIntro.Web.Infrastructure
 {
     public class WindsorControllerFactory : DefaultControllerFactory
     {
         private readonly IKernel kernel;
+        private IDisposable lifestyleScope;
 
         public WindsorControllerFactory(IKernel kernel)
         {
@@ -19,6 +21,7 @@ namespace DDDIntro.Web.Infrastructure
         public override void ReleaseController(IController controller)
         {
             kernel.ReleaseComponent(controller);
+            lifestyleScope.Dispose();
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
@@ -27,6 +30,9 @@ namespace DDDIntro.Web.Infrastructure
             {
                 throw new HttpException(404, string.Format("The controller for path '{0}' could not be found.", requestContext.HttpContext.Request.Path));
             }
+
+            lifestyleScope = kernel.BeginScope();
+
             return (IController)kernel.Resolve(controllerType);
         }
     }
