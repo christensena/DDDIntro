@@ -1,4 +1,5 @@
 using System.Linq;
+using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.CommandHandlers;
 using DDDIntro.Domain.Services.Commands;
@@ -28,7 +29,7 @@ namespace DDDIntro.IntegrationTests.Services.CommandHandling
 
             StartFirstOver(matchId);
 
-            var match = GetRepository<Match>().GetById(matchId);
+            var match = Resolve<IRepository<Match>>().GetById(matchId);
             var command = new RecordDeliveryCommand(match.Id, runsToBeScored);
 
             // Act
@@ -37,7 +38,7 @@ namespace DDDIntro.IntegrationTests.Services.CommandHandling
 
             // Assert
             // let's just do a few; should really be unit tests
-            var retrievedMatch = GetRepository<Match>().GetById(matchId);
+            var retrievedMatch = Resolve<IRepository<Match>>().GetById(matchId);
             var retrievedCurrentTeamInnings = retrievedMatch.Innings.Last();
             retrievedCurrentTeamInnings.GetCurrentOver().RunsScored().Should().Be(runsToBeScored);
             retrievedCurrentTeamInnings.GetScore().Should().Be(runsToBeScored);

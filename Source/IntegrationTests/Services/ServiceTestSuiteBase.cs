@@ -1,45 +1,37 @@
+using System;
+using Castle.MicroKernel.Lifestyle;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 using DDDIntro.Core;
-using DDDIntro.Domain.Abstract;
-using DDDIntro.Persistence.NHibernate;
-using NHibernate;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Services
 {
     public class ServiceTestSuiteBase
     {
-        private IUnitOfWorkFactory unitOfWorkFactory;
-        private ISessionFactory sessionFactory;
-        private ISession repositorySession;
+        private static readonly IWindsorContainer Container = new WindsorContainer().Install(FromAssembly.This());
+        private IDisposable lifeStyleScope;
 
         protected IUnitOfWorkFactory UnitOfWorkFactory
         {
-            get { return unitOfWorkFactory; }
+            get { return Resolve<IUnitOfWorkFactory>(); }
         }
 
-        protected IRepository<TEntity> GetRepository<TEntity>() where TEntity : class, IAggregateRoot
+        protected TComponent Resolve<TComponent>()
         {
-            return new NHibernateRepository<TEntity>(repositorySession);
-        }
-
-        [TestFixtureSetUp]
-        public void PersistenceTestSuiteBaseFixtureSetUp()
-        {
-            var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
-            sessionFactory = new SessionFactoryProvider(databaseConfiguration).GetSessionFactory();
-            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
+            return Container.Resolve<TComponent>();
         }
 
         [SetUp]
-        public void PersistenceTestSuiteBaseSetUp()
+        public void ServiceTestSuiteBaseSetUp()
         {
-            repositorySession = sessionFactory.OpenSession();
+            lifeStyleScope = Container.BeginScope();
         }
 
         [TearDown]
-        public void PersistenceTestSuiteBaseTearDown()
+        public void ServiceTestSuiteBaseTearDown()
         {
-            repositorySession.Dispose();
+            lifeStyleScope.Dispose();
         }
     }
 }

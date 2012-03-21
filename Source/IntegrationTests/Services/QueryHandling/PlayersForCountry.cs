@@ -1,3 +1,4 @@
+using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.Queries;
 using DDDIntro.Domain.Services.QueryHandlers;
@@ -15,7 +16,7 @@ namespace DDDIntro.IntegrationTests.Services.QueryHandling
         [SetUp]
         public void SetUp()
         {
-            queryHandler = new PlayersForCountryQueryHandler(GetRepository<Player>());
+            queryHandler = new PlayersForCountryQueryHandler(Resolve<IRepository<Player>>());
 
             setUpHelper = new ContextSetUpHelper(UnitOfWorkFactory);
         }

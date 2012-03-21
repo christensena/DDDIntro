@@ -110,6 +110,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoC\WindsorInstaller.cs" />
     <Compile Include="Services\CommandHandling\DeliveryRecording.cs" />
     <Compile Include="ContextSetUpHelper.cs" />
     <Compile Include="Persistence\GeneralPersistence.cs" />
@@ -147,9 +148,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IoC\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
