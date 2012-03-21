@@ -2,15 +2,24 @@
 using DDDIntro.Domain.Abstract;
 using DDDIntro.Persistence.NHibernate;
 using NHibernate;
+using NHibernate.Cfg;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Persistence
 {
     public abstract class PersistenceTestSuiteBase
     {
+        private static readonly ISessionFactory SessionFactory;
+        private static readonly Configuration DatabaseConfiguration;
+
         private IUnitOfWorkFactory unitOfWorkFactory;
-        private ISessionFactory sessionFactory;
         private ISession session;
+
+        static PersistenceTestSuiteBase()
+        {
+            DatabaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
+            SessionFactory = DatabaseConfiguration.BuildSessionFactory();
+        }
 
         protected IUnitOfWorkFactory UnitOfWorkFactory
         {
@@ -21,22 +30,19 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             return new NHibernateRepository<TEntity>(session);
         }
-
+        
         [SetUp]
         public void PersistenceTestSuiteBaseSetUp()
         {
-            var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
-            sessionFactory = databaseConfiguration.BuildSessionFactory();
-            session = sessionFactory.OpenSession();
+            session = SessionFactory.OpenSession();
             unitOfWorkFactory = new SessionSharingNHibernateUnitOfWorkFactory(session);
-            TempDatabaseNHibernateConfigurationProvider.InitialiseDatabase(databaseConfiguration, session);
+            TempDatabaseNHibernateConfigurationProvider.InitialiseDatabase(DatabaseConfiguration, session);
         }
 
         [TearDown]
         public void PersistenceTestSuiteBaseTearDown()
         {
             session.Dispose();
-            sessionFactory.Dispose();
         }
     }
 }
