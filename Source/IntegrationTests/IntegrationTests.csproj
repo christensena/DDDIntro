@@ -118,6 +118,7 @@
     <Compile Include="Persistence\PersistenceTestSuiteBase.cs" />
     <Compile Include="Persistence\TeamPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\QueryHandling\MatchesForPlayer.cs" />
     <Compile Include="Services\QueryHandling\PlayersForCountry.cs" />
     <Compile Include="Services\ServiceTestSuiteBase.cs" />
     <Compile Include="TempDatabaseNHibernateConfigurationProvider.cs" />
