@@ -10,7 +10,7 @@ namespace DDDIntro.IntegrationTests.Persistence
     {
         private IUnitOfWorkFactory unitOfWorkFactory;
         private ISessionFactory sessionFactory;
-        private ISession repositorySession;
+        private ISession session;
 
         protected IUnitOfWorkFactory UnitOfWorkFactory
         {
@@ -19,7 +19,7 @@ namespace DDDIntro.IntegrationTests.Persistence
 
         protected IRepository<TEntity> GetRepository<TEntity>() where TEntity : class, IAggregateRoot
         {
-            return new NHibernateRepository<TEntity>(repositorySession);
+            return new NHibernateRepository<TEntity>(session);
         }
 
         [SetUp]
@@ -27,14 +27,15 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
             sessionFactory = databaseConfiguration.BuildSessionFactory();
-            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
-            repositorySession = sessionFactory.OpenSession();
+            session = sessionFactory.OpenSession();
+            unitOfWorkFactory = new SessionSharingNHibernateUnitOfWorkFactory(session);
+            TempDatabaseNHibernateConfigurationProvider.InitialiseDatabase(databaseConfiguration, session);
         }
 
         [TearDown]
         public void PersistenceTestSuiteBaseTearDown()
         {
-            repositorySession.Dispose();
+            session.Dispose();
             sessionFactory.Dispose();
         }
     }

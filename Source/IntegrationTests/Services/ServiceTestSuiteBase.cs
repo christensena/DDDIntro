@@ -3,6 +3,7 @@ using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using DDDIntro.Core;
+using NHibernate;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Services
@@ -14,7 +15,7 @@ namespace DDDIntro.IntegrationTests.Services
 
         protected IUnitOfWorkFactory UnitOfWorkFactory
         {
-            get { return Resolve<IUnitOfWorkFactory>(); }
+            get { return Resolve<ISessionSharingUnitOfWorkFactory>(); }
         }
 
         protected TComponent Resolve<TComponent>()
