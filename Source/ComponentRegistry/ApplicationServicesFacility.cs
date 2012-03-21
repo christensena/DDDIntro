@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Registration;
 using DDDIntro.Application.Services;
 
-namespace ComponentRegistry
+namespace DDDIntro.ComponentRegistry
 {
     public class ApplicationServicesFacility : AbstractFacility
     {

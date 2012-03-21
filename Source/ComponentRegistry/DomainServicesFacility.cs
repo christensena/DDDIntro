@@ -6,7 +6,7 @@ using DDDIntro.Domain.Services.Factories;
 using DDDIntro.Domain.Services.QueryHandlers;
 using DDDIntro.Persistence.NHibernate.QueryHandlers;
 
-namespace ComponentRegistry
+namespace DDDIntro.ComponentRegistry
 {
     public class DomainServicesFacility : AbstractFacility
     {

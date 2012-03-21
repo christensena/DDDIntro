@@ -39,15 +39,15 @@ namespace DDDIntro.Persistence.NHibernate.QueryHandlers
                   @"SELECT Match.* FROM Match 
                     INNER JOIN Team ON Team.Match_Id=Match.Id 
                     INNER JOIN PlayerToTeam ON Team_Id=Team.Id
-                    WHERE PlayerToTeam.Player_Id = ?");
-            sqlQuery.SetInt32(0, query.PlayerID);
+                    WHERE PlayerToTeam.Player_Id = :playerId");
+            sqlQuery.SetInt32("playerId", query.PlayerID);
 
             var list = sqlQuery.AddEntity(typeof (Match)).List();
 
             return ConvertToTypedEnumerable<Match>(list).ToArray();
         }
 
-        private static IEnumerable<T> ConvertToTypedEnumerable<T>(IList list) where T : class
+        private static IEnumerable<T> ConvertToTypedEnumerable<T>(IEnumerable list) where T : class
         {
             return (from object item in list select item).Cast<T>();
         }

@@ -4,7 +4,7 @@ using DDDIntro.Core;
 using DDDIntro.Persistence.NHibernate;
 using NHibernate;
 
-namespace ComponentRegistry
+namespace DDDIntro.ComponentRegistry
 {
     public class PersistenceFacility : AbstractFacility
     {

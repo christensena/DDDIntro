@@ -8,8 +8,8 @@
     <ProjectGuid>{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ComponentRegistry</RootNamespace>
-    <AssemblyName>ComponentRegistry</AssemblyName>
+    <RootNamespace>DDDIntro.ComponentRegistry</RootNamespace>
+    <AssemblyName>DDDIntro.ComponentRegistry</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Source\</SolutionDir>
