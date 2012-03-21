@@ -38,8 +38,8 @@ namespace DDDIntro.Persistence.NHibernate.QueryHandlers
             var sqlQuery = session.CreateSQLQuery(
                   @"SELECT Match.* FROM Match 
                     INNER JOIN Team ON Team.Match_Id=Match.Id 
-                    INNER JOIN PlayerToTeam ON Team_Id=Team.Id
-                    WHERE PlayerToTeam.Player_Id = :playerId");
+                    INNER JOIN TeamMember ON Team_Id=Team.Id
+                    WHERE TeamMember.Player_Id = :playerId");
             sqlQuery.SetInt32("playerId", query.PlayerID);
 
             var list = sqlQuery.AddEntity(typeof (Match)).List();
