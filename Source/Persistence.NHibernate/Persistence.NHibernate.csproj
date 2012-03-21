@@ -89,7 +89,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISessionFactoryProvider.cs" />
     <Compile Include="MappingConventions\DefaultMappingConfiguration.cs" />
     <Compile Include="MappingConventions\IdGenerationConvention.cs" />
     <Compile Include="MappingOverrides\MatchMappingOverride.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="NHibernateUnitOfWork.cs" />
     <Compile Include="NHibernateUnitOfWorkFactory.cs" />
     <Compile Include="QueryHandlers\MatchesForPlayerQueryHandler.cs" />
-    <Compile Include="SessionFactoryProvider.cs" />
     <Compile Include="SessionSharingNHibernateUnitOfWorkFactory.cs" />
   </ItemGroup>
   <ItemGroup>

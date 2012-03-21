@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DDDIntro.Core;
 using DDDIntro.Domain;
+using DDDIntro.Domain.Services;
 using DDDIntro.Domain.Services.Queries;
-using DDDIntro.Persistence.NHibernate.QueryHandlers;
 using FluentAssertions;
-using NHibernate;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Services.QueryHandling
@@ -14,13 +13,13 @@ namespace DDDIntro.IntegrationTests.Services.QueryHandling
     [TestFixture]
     public class MatchesForPlayer : ServiceTestSuiteBase
     {
-        private MatchesForPlayerQueryHandler queryHandler;
+        private IQueryHandler<MatchesForPlayerQuery, Match[]> queryHandler;
         private ContextSetUpHelper setUpHelper;
 
         [SetUp]
         public void SetUp()
         {
-            queryHandler = new MatchesForPlayerQueryHandler(Resolve<ISession>());
+            queryHandler = Resolve<IQueryHandler<MatchesForPlayerQuery, Match[]>>();
 
             setUpHelper = new ContextSetUpHelper(UnitOfWorkFactory);
         }

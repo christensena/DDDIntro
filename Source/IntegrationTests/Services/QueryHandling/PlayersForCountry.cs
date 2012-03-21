@@ -1,7 +1,6 @@
-using DDDIntro.Core;
 using DDDIntro.Domain;
+using DDDIntro.Domain.Services;
 using DDDIntro.Domain.Services.Queries;
-using DDDIntro.Domain.Services.QueryHandlers;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -10,13 +9,13 @@ namespace DDDIntro.IntegrationTests.Services.QueryHandling
     [TestFixture]
     public class PlayersForCountry : ServiceTestSuiteBase
     {
-        private PlayersForCountryQueryHandler queryHandler;
+        private IQueryHandler<PlayersForCountryQuery, Player[]> queryHandler;
         private ContextSetUpHelper setUpHelper;
 
         [SetUp]
         public void SetUp()
         {
-            queryHandler = new PlayersForCountryQueryHandler(Resolve<IRepository<Player>>());
+            queryHandler = Resolve<IQueryHandler<PlayersForCountryQuery, Player[]>>();
 
             setUpHelper = new ContextSetUpHelper(UnitOfWorkFactory);
         }

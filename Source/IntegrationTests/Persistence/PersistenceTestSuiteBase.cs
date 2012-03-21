@@ -22,17 +22,12 @@ namespace DDDIntro.IntegrationTests.Persistence
             return new NHibernateRepository<TEntity>(repositorySession);
         }
 
-        [TestFixtureSetUp]
-        public void PersistenceTestSuiteBaseFixtureSetUp()
-        {
-            var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
-            sessionFactory = new SessionFactoryProvider(databaseConfiguration).GetSessionFactory();
-            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
-        }
-
         [SetUp]
         public void PersistenceTestSuiteBaseSetUp()
         {
+            var databaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
+            sessionFactory = databaseConfiguration.BuildSessionFactory();
+            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(sessionFactory);
             repositorySession = sessionFactory.OpenSession();
         }
 
@@ -40,6 +35,7 @@ namespace DDDIntro.IntegrationTests.Persistence
         public void PersistenceTestSuiteBaseTearDown()
         {
             repositorySession.Dispose();
+            sessionFactory.Dispose();
         }
     }
 }
