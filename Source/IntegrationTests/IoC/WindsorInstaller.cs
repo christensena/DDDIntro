@@ -18,7 +18,9 @@ namespace DDDIntro.IntegrationTests.IoC
             // using an in-memory sqllite database for speed and to encourage
             // database engine portability
             container.Register(
-                Component.For<INHibernateConfigurationProvider>().ImplementedBy<InMemoryNHibernateConfigurationProvider>());
+                Component.For<INHibernateConfigurationProvider>()
+                .ImplementedBy<InMemoryNHibernateConfigurationProvider>()
+                .LifestyleSingleton());
 
             // we're using nhibernate against an in-memory database that gets lost each session
             // export the schema on the session's connection when a session is created

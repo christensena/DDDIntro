@@ -19,7 +19,8 @@ namespace DDDIntro.Web.Infrastructure
 
             // we're using nhibernate against SQL Server here
             container.Register(
-                Component.For<INHibernateConfigurationProvider>().ImplementedBy<SqlServerNHibernateConfigurationProvider>());
+                Component.For<INHibernateConfigurationProvider>()
+                .ImplementedBy<SqlServerNHibernateConfigurationProvider>().LifestyleSingleton());
 
             // register all Fluent Validators
             container.Register(
