@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INHibernateConfigurationProvider.cs" />
     <Compile Include="MappingConventions\DefaultMappingConfiguration.cs" />
     <Compile Include="MappingConventions\IdGenerationConvention.cs" />
     <Compile Include="MappingOverrides\MatchMappingOverride.cs" />

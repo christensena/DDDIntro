@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DDDIntro.ComponentRegistry;
+using DDDIntro.Persistence.NHibernate;
 using DDDIntro.Web.Infrastructure.Persistence;
 using FluentValidation;
 
@@ -18,7 +19,7 @@ namespace DDDIntro.Web.Infrastructure
 
             // we're using nhibernate against SQL Server here
             container.Register(
-                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(x => SqlServerNHibernateConfigurationProvider.GetDatabaseConfiguration()).LifestyleSingleton());
+                Component.For<INHibernateConfigurationProvider>().ImplementedBy<SqlServerNHibernateConfigurationProvider>());
 
             // register all Fluent Validators
             container.Register(

@@ -5,13 +5,17 @@ using DDDIntro.Persistence.NHibernate.MappingOverrides;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using Configuration = NHibernate.Cfg.Configuration;
+using NHibernate.Cfg;
 
 namespace DDDIntro.Persistence.NHibernate
 {
-    public static class NHibernateConfigurationProvider
+    public abstract class NHibernateConfigurationProvider : INHibernateConfigurationProvider
     {
-        public static Configuration GetDatabaseConfiguration(IPersistenceConfigurer databaseDriver, Action<Configuration> databaseBuilder = null)
+        public abstract Configuration GetDatabaseConfiguration();
+
+        public Configuration CreateCoreDatabaseConfiguration(
+            IPersistenceConfigurer databaseDriver, 
+            Action<Configuration> databaseBuilder = null)
         {
             var fluentConfiguration =  
                 Fluently.Configure()

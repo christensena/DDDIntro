@@ -9,7 +9,26 @@ namespace DDDIntro.IntegrationTests.Persistence
     public class GeneralPersistence : PersistenceTestSuiteBase
     {
         [Test]
-        public void BeginUnitOfWork_EntityAdded_ExceptionOccursInScope_EntityShouldNotBePersisted()
+        public void UnitOfWork_EntityAdded_CompleteNotCalled_EntityShouldNotBePersisted()
+        {
+            // Act
+            try
+            {
+                using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
+                {
+                    uow.Add(new Country("Test"));
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            // Assert
+            GetRepository<Country>().FindAll().Should().BeEmpty();
+        }
+
+        [Test]
+        public void UnitOfWork_EntityAdded_ExceptionOccursInScope_EntityShouldNotBePersisted()
         {
             // Act
             try
@@ -30,7 +49,7 @@ namespace DDDIntro.IntegrationTests.Persistence
         }
 
         [Test]
-        public void BeginUnitOfWork_NoExceptionsEntityAdded_EntityShouldBePersisted()
+        public void UnitOfWork_NoExceptionsEntityAdded_EntityShouldBePersisted()
         {
             // Arrange
 

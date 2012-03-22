@@ -55,6 +55,7 @@ namespace DDDIntro.IntegrationTests.Services.QueryHandling
 
             // Assert
             result.Should().BeEquivalentTo(expectedResult);
+            result.First().Team1.Members.Should().BeEquivalentTo(expectedResult.First().Team1.Members);
         }
     }
 }

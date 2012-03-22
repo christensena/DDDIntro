@@ -1,4 +1,3 @@
-using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
@@ -10,13 +9,15 @@ using Configuration = NHibernate.Cfg.Configuration;
 
 namespace DDDIntro.Web.Infrastructure.Persistence
 {
-    public class SqlServerNHibernateConfigurationProvider
+    public class SqlServerNHibernateConfigurationProvider : NHibernateConfigurationProvider
     {
         private static readonly string SqlConnectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
 
-        public static Configuration GetDatabaseConfiguration()
+        public override Configuration GetDatabaseConfiguration()
         {
-            return NHibernateConfigurationProvider.GetDatabaseConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(SqlConnectionString), BuildDatabase);
+            return CreateCoreDatabaseConfiguration(
+                MsSqlConfiguration.MsSql2008.ConnectionString(SqlConnectionString), 
+                BuildDatabase);
         }
 
         private static void BuildDatabase(Configuration configuration)

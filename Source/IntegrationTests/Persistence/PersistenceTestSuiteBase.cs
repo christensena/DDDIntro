@@ -17,7 +17,7 @@ namespace DDDIntro.IntegrationTests.Persistence
 
         static PersistenceTestSuiteBase()
         {
-            DatabaseConfiguration = TempDatabaseNHibernateConfigurationProvider.GetTempDatabaseConfiguration();
+            DatabaseConfiguration = new InMemoryNHibernateConfigurationProvider().GetDatabaseConfiguration();
             SessionFactory = DatabaseConfiguration.BuildSessionFactory();
         }
 
@@ -36,7 +36,7 @@ namespace DDDIntro.IntegrationTests.Persistence
         {
             session = SessionFactory.OpenSession();
             unitOfWorkFactory = new SessionSharingNHibernateUnitOfWorkFactory(session);
-            TempDatabaseNHibernateConfigurationProvider.InitialiseDatabase(DatabaseConfiguration, session);
+            InMemoryNHibernateConfigurationProvider.InitialiseDatabase(DatabaseConfiguration, session);
         }
 
         [TearDown]

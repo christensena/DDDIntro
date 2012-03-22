@@ -7,12 +7,12 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace DDDIntro.IntegrationTests
 {
-    public static class TempDatabaseNHibernateConfigurationProvider
+    public class InMemoryNHibernateConfigurationProvider : NHibernateConfigurationProvider
     {
-        public static Configuration GetTempDatabaseConfiguration()
+        public override Configuration GetDatabaseConfiguration()
         {
             var databaseDriver = SQLiteConfiguration.Standard.InMemory().ShowSql();
-            return NHibernateConfigurationProvider.GetDatabaseConfiguration(databaseDriver);
+            return CreateCoreDatabaseConfiguration(databaseDriver);
         }
 
         public static void InitialiseDatabase(Configuration configuration, ISession session)

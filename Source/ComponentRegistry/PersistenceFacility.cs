@@ -11,6 +11,7 @@ namespace DDDIntro.ComponentRegistry
         protected override void Init()
         {
             Kernel.Register(
+                Component.For<NHibernate.Cfg.Configuration>().UsingFactoryMethod(kernel => kernel.Resolve<INHibernateConfigurationProvider>().GetDatabaseConfiguration()).LifestyleSingleton(),
                 Component.For<ISessionFactory>().UsingFactoryMethod(ctx => ctx.Resolve<NHibernate.Cfg.Configuration>().BuildSessionFactory()).LifestyleSingleton(),
                 Component.For<ISession>().UsingFactoryMethod(ctx => ctx.Resolve<ISessionFactory>().OpenSession()).LifestyleScoped());
 
