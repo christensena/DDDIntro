@@ -12,14 +12,17 @@ Albacore.configure do |config|
     config.msbuild.use :net4
 end
 
+#Add the folders that should be cleaned as part of the clean task
+CLEAN = Rake::FileList.new; # how to remove the **Core rule from the default CLEAN list?
+CLEAN.include(FileList["Source/**/#{CONFIGURATION}"])
+
+CLOBBER.include(FileList["Packages/**"])
+
 desc "Compiles solution and runs unit tests"
 task :default => [:clean, :compile, :test]
 
 desc "Executes all MSpec and NUnit tests"
 task :test => [:mspec, :nunit]
-
-#Add the folders that should be cleaned as part of the clean task
-CLEAN = FileList["Source/**/#{CONFIGURATION}"]
 
 desc "Compile solution file"
 msbuild :compile do |msb|
@@ -29,11 +32,11 @@ msbuild :compile do |msb|
 end
 
 desc "Executes MSpec tests"
-mspec :mspec => [:compile] do |mspec|
-    #This is a bit fragile but this is the only mspec assembly at present. 
-    #Fails if passed a FileList of all tests. Need to investigate.
+mspec :mspec  do |mspec| # => [:compile]
+    specs = FileList["Source/**/#{CONFIGURATION}/*Tests.dll"].exclude(/obj\//)
+
     mspec.command = "Packages/Machine.Specifications.0.5.5.0/tools/mspec-x86-clr4.exe"
-    mspec.assemblies "Source/UnitTests/bin/Release/DDDIntro.UnitTests.dll"
+    mspec.assemblies = specs
 end
 
 desc "Executes NUnit tests"
