@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using DDDIntro.Core;
 using NHibernate;
 
@@ -6,17 +6,17 @@ namespace DDDIntro.Persistence.NHibernate
 {
     public class NHibernateUnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly ISessionFactory sessionFactory;
+        private readonly ISession session;
 
-        public NHibernateUnitOfWorkFactory(ISessionFactory sessionFactory)
+        public NHibernateUnitOfWorkFactory(ISession session)
         {
-            if (sessionFactory == null) throw new ArgumentNullException("sessionFactory");
-            this.sessionFactory = sessionFactory;
+            if (session == null) throw new ArgumentNullException("session");
+            this.session = session;
         }
 
         public IUnitOfWork BeginUnitOfWork()
         {
-            return new NHibernateUnitOfWork(sessionFactory);
+            return new NHibernateUnitOfWork(session);
         }
     }
 }

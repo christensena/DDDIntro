@@ -17,8 +17,8 @@ namespace DDDIntro.ComponentRegistry
 
             Kernel.Register(
                 Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NHibernateRepository<>)).LifestyleScoped(),
-                Component.For<IUnitOfWorkFactory>().ImplementedBy<NHibernateUnitOfWorkFactory>().LifestyleSingleton(),
-                Component.For<ISessionSharingUnitOfWorkFactory>().ImplementedBy<SessionSharingNHibernateUnitOfWorkFactory>().LifestyleScoped());
+                Component.For<IIsolatedUnitOfWorkFactory>().ImplementedBy<NHibernateIsolatedUnitOfWorkFactory>().LifestyleSingleton(),
+                Component.For<IUnitOfWorkFactory>().ImplementedBy<NHibernateUnitOfWorkFactory>().LifestyleScoped());
         }
     }
 }

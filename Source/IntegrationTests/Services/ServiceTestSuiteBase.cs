@@ -14,7 +14,7 @@ namespace DDDIntro.IntegrationTests.Services
 
         protected IUnitOfWorkFactory UnitOfWorkFactory
         {
-            get { return Resolve<ISessionSharingUnitOfWorkFactory>(); }
+            get { return Resolve<IUnitOfWorkFactory>(); }
         }
 
         protected TComponent Resolve<TComponent>()

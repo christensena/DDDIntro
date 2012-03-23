@@ -101,9 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NHibernateRepository.cs" />
     <Compile Include="NHibernateUnitOfWork.cs" />
-    <Compile Include="NHibernateUnitOfWorkFactory.cs" />
+    <Compile Include="NHibernateIsolatedUnitOfWorkFactory.cs" />
     <Compile Include="QueryHandlers\MatchesForPlayerQueryHandler.cs" />
-    <Compile Include="SessionSharingNHibernateUnitOfWorkFactory.cs" />
+    <Compile Include="NHibernateUnitOfWorkFactory.cs" />
     <Compile Include="NHibernateConfigurationProviders\SqlServerNHibernateConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>

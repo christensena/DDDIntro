@@ -9,7 +9,7 @@ namespace DDDIntro.Web.Infrastructure.GlobalFilters
         private readonly Func<IUnitOfWorkFactory> unitOfWorkFactoryProvider;
         private IUnitOfWork unitOfWork;
 
-        public SessionPerRequestActionFilter(Func<ISessionSharingUnitOfWorkFactory> unitOfWorkFactoryProvider)
+        public SessionPerRequestActionFilter(Func<IUnitOfWorkFactory> unitOfWorkFactoryProvider)
         {
             if (unitOfWorkFactoryProvider == null) throw new ArgumentNullException("unitOfWorkFactoryProvider");
             this.unitOfWorkFactoryProvider = unitOfWorkFactoryProvider;

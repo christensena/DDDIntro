@@ -7,10 +7,10 @@ namespace DDDIntro.Application.Services
 {
     public class TestDataGenerator
     {
-        private readonly IUnitOfWorkFactory unitOfWorkFactory;
+        private readonly IIsolatedUnitOfWorkFactory unitOfWorkFactory;
         private readonly CountryFactory countryFactory;
 
-        public TestDataGenerator(IUnitOfWorkFactory unitOfWorkFactory, CountryFactory countryFactory)
+        public TestDataGenerator(IIsolatedUnitOfWorkFactory unitOfWorkFactory, CountryFactory countryFactory)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.countryFactory = countryFactory;

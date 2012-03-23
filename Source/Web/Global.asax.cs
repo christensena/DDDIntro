@@ -17,7 +17,7 @@ namespace DDDIntro.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new SessionPerRequestActionFilter(() => container.Resolve<ISessionSharingUnitOfWorkFactory>()));
+            filters.Add(new SessionPerRequestActionFilter(() => container.Resolve<IUnitOfWorkFactory>()));
         }
 
         public static void RegisterRoutes(RouteCollection routes)

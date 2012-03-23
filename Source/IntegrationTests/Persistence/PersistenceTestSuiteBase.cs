@@ -36,7 +36,7 @@ namespace DDDIntro.IntegrationTests.Persistence
         public void PersistenceTestSuiteBaseSetUp()
         {
             session = SessionFactory.OpenSession();
-            unitOfWorkFactory = new SessionSharingNHibernateUnitOfWorkFactory(session);
+            unitOfWorkFactory = new NHibernateUnitOfWorkFactory(session);
             InMemoryNHibernateConfigurationProvider.InitialiseDatabase(DatabaseConfiguration, session);
         }
 

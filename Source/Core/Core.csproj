@@ -71,11 +71,11 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISessionSharingUnitOfWorkFactory.cs" />
+    <Compile Include="IUnitOfWorkFactory.cs" />
     <Compile Include="IUniversalRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IUnitOfWorkFactory.cs" />
+    <Compile Include="IIsolatedUnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
