@@ -1,6 +1,6 @@
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 using DDDIntro.Persistence.NHibernate;
 using NHibernate;
 

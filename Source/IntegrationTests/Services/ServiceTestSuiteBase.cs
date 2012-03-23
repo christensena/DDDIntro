@@ -2,7 +2,7 @@ using System;
 using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Services

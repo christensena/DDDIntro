@@ -1,7 +1,7 @@
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.Factories;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.Application.Services
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain.Abstract;
 using NHibernate;
 using NHibernate.Linq;

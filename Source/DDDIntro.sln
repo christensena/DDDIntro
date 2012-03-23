@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.NHibernate", "Persistence.NHibernate\Persistence.NHibernate.csproj", "{CC822684-2088-480B-9497-C76965066F24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{3B7D0B6F-9778-4284-83A2-70654F5C9AE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Services", "Domain.Services\Domain.Services.csproj", "{19AF1420-2B48-4686-B208-60CC41F38A9D}"
@@ -26,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{544644
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentRegistry", "ComponentRegistry\ComponentRegistry.csproj", "{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,14 +59,6 @@ Global
 		{CC822684-2088-480B-9497-C76965066F24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC822684-2088-480B-9497-C76965066F24}.Release|x86.ActiveCfg = Release|x86
 		{CC822684-2088-480B-9497-C76965066F24}.Release|x86.Build.0 = Release|x86
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|x86.Build.0 = Debug|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|x86.ActiveCfg = Release|x86
-		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|x86.Build.0 = Release|x86
 		{3B7D0B6F-9778-4284-83A2-70654F5C9AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B7D0B6F-9778-4284-83A2-70654F5C9AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B7D0B6F-9778-4284-83A2-70654F5C9AE6}.Debug|x86.ActiveCfg = Debug|x86
@@ -102,6 +94,14 @@ Global
 		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}.Release|x86.ActiveCfg = Release|Any CPU
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|x86.ActiveCfg = Debug|x86
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Debug|x86.Build.0 = Debug|x86
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|x86.ActiveCfg = Release|x86
+		{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

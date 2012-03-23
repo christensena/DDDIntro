@@ -1,5 +1,5 @@
 using System.Linq;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 using FluentValidation;
 
 namespace DDDIntro.Web.ViewModels.Country.Validation

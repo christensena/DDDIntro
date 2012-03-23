@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain.Services.Queries;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.Domain.Services.QueryHandlers
 {

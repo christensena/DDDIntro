@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 using DDDIntro.Web.Infrastructure;
 using DDDIntro.Web.Infrastructure.GlobalFilters;
 using FluentValidation.Mvc;

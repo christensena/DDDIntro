@@ -13,10 +13,10 @@ Albacore.configure do |config|
 end
 
 #Add the folders that should be cleaned as part of the clean task
-CLEAN = Rake::FileList.new; # how to remove the **Core rule from the default CLEAN list?
 CLEAN.include(FileList["Source/**/#{CONFIGURATION}"])
 
-CLOBBER.include(FileList["Packages/**"])
+# files for a pristine working copy (or just use git clean)
+CLOBBER.include(FileList["Packages/**", "Source/**/*.user", "Source/**/*.suo", "Source/**/*.cache", "Source/_ReSharper*"])
 
 desc "Compiles solution and runs unit tests"
 task :default => [:clean, :compile, :test]

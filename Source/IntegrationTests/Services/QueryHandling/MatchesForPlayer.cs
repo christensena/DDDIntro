@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services;
 using DDDIntro.Domain.Services.Queries;
+using DDDIntro.Persistence;
 using FluentAssertions;
 using NUnit.Framework;
 

@@ -1,4 +1,4 @@
-﻿namespace DDDIntro.Core
+﻿namespace DDDIntro.Persistence
 {
     public interface IUnitOfWorkFactory
     {

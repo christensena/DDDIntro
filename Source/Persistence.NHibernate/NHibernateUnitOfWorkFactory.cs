@@ -1,5 +1,4 @@
 ﻿using System;
-using DDDIntro.Core;
 using NHibernate;
 
 namespace DDDIntro.Persistence.NHibernate

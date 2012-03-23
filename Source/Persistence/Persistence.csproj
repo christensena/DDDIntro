@@ -8,8 +8,8 @@
     <ProjectGuid>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DDDIntro.Core</RootNamespace>
-    <AssemblyName>DDDIntro.Core</AssemblyName>
+    <RootNamespace>DDDIntro.Persistence</RootNamespace>
+    <AssemblyName>DDDIntro.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Source\</SolutionDir>

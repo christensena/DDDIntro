@@ -1,8 +1,8 @@
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.CommandHandlers;
 using DDDIntro.Domain.Services.Commands;
+using DDDIntro.Persistence;
 using FluentAssertions;
 using NUnit.Framework;
 

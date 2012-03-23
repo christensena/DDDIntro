@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using DDDIntro.Core;
 using DDDIntro.Domain;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.IntegrationTests
 {

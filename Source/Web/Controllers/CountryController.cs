@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
-using DDDIntro.Core;
 using DDDIntro.Domain;
 using DDDIntro.Domain.Services.Factories;
+using DDDIntro.Persistence;
 using DDDIntro.Web.ViewModels.Country;
 
 namespace DDDIntro.Web.Controllers

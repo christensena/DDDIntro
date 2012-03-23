@@ -1,5 +1,5 @@
-﻿using DDDIntro.Core;
-using DDDIntro.Domain.Abstract;
+﻿using DDDIntro.Domain.Abstract;
+using DDDIntro.Persistence;
 using DDDIntro.Persistence.NHibernate;
 using DDDIntro.Persistence.NHibernate.NHibernateConfigurationProviders;
 using NHibernate;

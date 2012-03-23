@@ -1,6 +1,6 @@
 using System;
 using System.Web.Mvc;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.Web.Infrastructure.GlobalFilters
 {

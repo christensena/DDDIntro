@@ -107,10 +107,6 @@
     <Compile Include="NHibernateConfigurationProviders\SqlServerNHibernateConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain.Services\Domain.Services.csproj">
       <Project>{19af1420-2b48-4686-b208-60cc41f38a9d}</Project>
       <Name>Domain.Services</Name>
@@ -118,6 +114,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{DCD83940-8291-4A19-954C-CEF5943AE3F5}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

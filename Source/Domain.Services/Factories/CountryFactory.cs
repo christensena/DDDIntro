@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DDDIntro.Core;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.Domain.Services.Factories
 {

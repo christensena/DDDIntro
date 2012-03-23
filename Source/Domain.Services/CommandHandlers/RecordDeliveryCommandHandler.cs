@@ -1,6 +1,6 @@
 using System;
-using DDDIntro.Core;
 using DDDIntro.Domain.Services.Commands;
+using DDDIntro.Persistence;
 
 namespace DDDIntro.Domain.Services.CommandHandlers
 {

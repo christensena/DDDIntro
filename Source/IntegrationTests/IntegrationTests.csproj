@@ -127,10 +127,6 @@
       <Project>{DD59294F-6F1C-40C4-8E47-EFF01C4AC830}</Project>
       <Name>ComponentRegistry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain.Services\Domain.Services.csproj">
       <Project>{19AF1420-2B48-4686-B208-60CC41F38A9D}</Project>
       <Name>Domain.Services</Name>
@@ -142,6 +138,10 @@
     <ProjectReference Include="..\Persistence.NHibernate\Persistence.NHibernate.csproj">
       <Project>{CC822684-2088-480B-9497-C76965066F24}</Project>
       <Name>Persistence.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{8691E8F4-FCEB-4583-BEB8-16D3DB51F04D}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

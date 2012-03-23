@@ -1,7 +1,7 @@
 using System.Linq;
 using DDDIntro.Domain.Abstract;
 
-namespace DDDIntro.Core
+namespace DDDIntro.Persistence
 {
     /// <summary>
     /// Simple traditional repository. 

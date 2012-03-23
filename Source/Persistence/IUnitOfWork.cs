@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DDDIntro.Core
+namespace DDDIntro.Persistence
 {
     public interface IUnitOfWork : IUniversalRepository, IDisposable
     {
