@@ -46,8 +46,6 @@ namespace DDDIntro.Web
                 {
                     provider.ValidatorFactory = new WindsorValidatorFactory(container);
                 });
-
-            AutoMapperConfiguration.Configure();
         }
 
         protected void Application_End()
