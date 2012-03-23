@@ -7,7 +7,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 
-namespace DDDIntro.Persistence.NHibernate
+namespace DDDIntro.Persistence.NHibernate.NHibernateConfigurationProviders
 {
     public abstract class NHibernateConfigurationProvider : INHibernateConfigurationProvider
     {

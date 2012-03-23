@@ -96,13 +96,15 @@
     <Compile Include="MappingOverrides\OverMappingOverride.cs" />
     <Compile Include="MappingOverrides\TeamInningsMappingOverride.cs" />
     <Compile Include="MappingOverrides\TeamMappingOverride.cs" />
-    <Compile Include="NHibernateConfigurationProvider.cs" />
+    <Compile Include="NHibernateConfigurationProviders\InMemoryNHibernateConfigurationProvider.cs" />
+    <Compile Include="NHibernateConfigurationProviders\NHibernateConfigurationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NHibernateRepository.cs" />
     <Compile Include="NHibernateUnitOfWork.cs" />
     <Compile Include="NHibernateUnitOfWorkFactory.cs" />
     <Compile Include="QueryHandlers\MatchesForPlayerQueryHandler.cs" />
     <Compile Include="SessionSharingNHibernateUnitOfWorkFactory.cs" />
+    <Compile Include="NHibernateConfigurationProviders\SqlServerNHibernateConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

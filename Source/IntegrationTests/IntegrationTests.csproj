@@ -121,7 +121,6 @@
     <Compile Include="Services\QueryHandling\MatchesForPlayer.cs" />
     <Compile Include="Services\QueryHandling\PlayersForCountry.cs" />
     <Compile Include="Services\ServiceTestSuiteBase.cs" />
-    <Compile Include="InMemoryNHibernateConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComponentRegistry\ComponentRegistry.csproj">

@@ -1,14 +1,11 @@
-using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
-using DDDIntro.Persistence.NHibernate;
 using FluentNHibernate.Cfg.Db;
-using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using Configuration = NHibernate.Cfg.Configuration;
 
-namespace DDDIntro.Web.Infrastructure.Persistence
+namespace DDDIntro.Persistence.NHibernate.NHibernateConfigurationProviders
 {
     public class SqlServerNHibernateConfigurationProvider : NHibernateConfigurationProvider
     {

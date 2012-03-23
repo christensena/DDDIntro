@@ -1,6 +1,7 @@
 ﻿using DDDIntro.Core;
 using DDDIntro.Domain.Abstract;
 using DDDIntro.Persistence.NHibernate;
+using DDDIntro.Persistence.NHibernate.NHibernateConfigurationProviders;
 using NHibernate;
 using NHibernate.Cfg;
 using NUnit.Framework;

@@ -1,11 +1,10 @@
 using System;
-using DDDIntro.Persistence.NHibernate;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace DDDIntro.IntegrationTests
+namespace DDDIntro.Persistence.NHibernate.NHibernateConfigurationProviders
 {
     public class InMemoryNHibernateConfigurationProvider : NHibernateConfigurationProvider
     {

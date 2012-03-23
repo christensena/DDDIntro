@@ -3,7 +3,6 @@ using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using DDDIntro.Core;
-using NHibernate;
 using NUnit.Framework;
 
 namespace DDDIntro.IntegrationTests.Services

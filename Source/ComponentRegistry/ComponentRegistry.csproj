@@ -59,8 +59,10 @@
   <ItemGroup>
     <Compile Include="ApplicationServicesFacility.cs" />
     <Compile Include="DomainServicesFacility.cs" />
+    <Compile Include="InMemorySqlLitePersistenceFacility.cs" />
     <Compile Include="PersistenceFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerPersistenceFacility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application.Services\Application.Services.csproj">
