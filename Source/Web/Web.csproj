@@ -123,6 +123,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\ControllerFactoryBootstrapper.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\GlobalActionFilterRegister.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\RouteRegister.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\ValidatorFactoryBootstrapper.cs" />
+    <Compile Include="Infrastructure\Bootstrapping\MasterBootstrapper.cs" />
     <Compile Include="Infrastructure\GlobalFilters\SessionPerRequestActionFilter.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\WindsorInstaller.cs" />
