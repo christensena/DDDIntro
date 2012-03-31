@@ -3,7 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <title>Web API Home &ndash; DDDIntro</title>
-    <link rel="stylesheet" type="text/css" href="/Assets/CSS/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/CSS/lib/bootstrap.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/Assets/CSS/application.css" charset="utf-8" />
+    <script type="text/javascript" src="/Assets/Scripts/lib/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/Assets/Scripts/lib/jquery.tmpl.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/Assets/Scripts/lib/spine.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/Assets/Scripts/lib/spine.local.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/Assets/Scripts/application.js" charset="utf-8"></script>
+
+    <script type="text/x-jquery-tmpl" id="countryTemplate">
+      <div class="item">
+        <div class="view" title="Double click to edit...">
+          <span>${name}</span> <a class="destroy">Delete</a>
+        </div>
+        <div class="edit">
+            <input type="text" value="${name}">
+        </div>
+      </div>
+    </script>
 </head>
 <body>
     <h2>
@@ -13,5 +30,22 @@
     <ul>
         <li><a href="/countries">Countries</a></li>
     </ul>
+    <div id="views">
+        <div id="countries">
+            
+            <h1>Countries</h1>
+
+            <form>
+                <input type="text" placeholder="Country Name">
+            </form>
+            
+            <div class="items">
+            </div>
+
+            <footer>
+                <a class="clear">Clear</a>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>
