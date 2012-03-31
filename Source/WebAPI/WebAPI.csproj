@@ -72,9 +72,14 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\CSS\bootstrap.css" />
+    <Content Include="Assets\CSS\application.css" />
+    <Content Include="Assets\CSS\lib\bootstrap.css" />
+    <Content Include="Assets\Scripts\application.js" />
     <Content Include="Assets\Scripts\lib\jquery.js" />
-    <Content Include="Assets\Scripts\lib\spine.js" />
+    <Content Include="Assets\Scripts\lib\jquery.tmpl.js" />
+    <Content Include="Assets\Scripts\lib\spine\ajax.js" />
+    <Content Include="Assets\Scripts\lib\spine\local.js" />
+    <Content Include="Assets\Scripts\lib\spine\spine.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -89,7 +94,6 @@
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\CountryModule.cs" />
-    <Compile Include="Resources\Countries.cs" />
     <Compile Include="Resources\Country.cs" />
   </ItemGroup>
   <ItemGroup>

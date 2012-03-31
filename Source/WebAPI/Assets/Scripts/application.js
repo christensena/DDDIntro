@@ -1,11 +1,12 @@
 ﻿var Country = Spine.Model.sub();
 
-Country.configure("Country", "name", "id");
+Country.configure("Country", "Name", "id");
 
-// Persist with Local Storage
-Country.extend(Spine.Model.Local);
-
+// Persist with Ajax
+Country.extend(Spine.Model.Ajax);
 Country.extend({
+  url: "/countries",
+
   all: function(){
     return this.select(function(item) {
       return true;
@@ -48,7 +49,7 @@ var CountriesController = Spine.Controller.sub({
 
     create: function (e) {
         e.preventDefault();
-        Country.create({ name: this.input.val() });
+        Country.create({ Name: this.input.val() });
         this.input.val("");
     },
 
@@ -98,7 +99,7 @@ var CountryController = Spine.Controller.sub({
     close: function() {
       this.el.removeClass("editing");
       this.item.updateAttributes({
-        name: this.input.val()
+        Name: this.input.val()
       });
     },
 

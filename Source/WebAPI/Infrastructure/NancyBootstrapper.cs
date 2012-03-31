@@ -1,6 +1,7 @@
 using System;
 using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor.Installer;
+using DDDIntro.Persistence;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 
@@ -8,18 +9,36 @@ namespace DDDIntro.WebAPI.Infrastructure
 {
     public class NancyBootstrapper : WindsorNancyBootstrapper
     {
-        private IDisposable lifestyleScope;
-
         protected override void ApplicationStartup(Castle.Windsor.IWindsorContainer container, Nancy.Bootstrapper.IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
 
+            // todo: put these out into some sort of SessionPerRequestPipelineStep class
             pipelines.BeforeRequest += context => {
-                                                      lifestyleScope = container.BeginScope();
-                                                      return null;
+                context.Items["LifestyleScope"] = container.BeginScope();
+                context.Items["UnitOfWork"] = container.Resolve<IUnitOfWorkFactory>().BeginUnitOfWork();
+                return null;
             };
 
-            pipelines.AfterRequest += context => lifestyleScope.Dispose();
+            pipelines.AfterRequest += context =>
+                                          {
+                                              // todo: get to the bottom of why this guard condition is needed with static resources
+                                              if (! context.Items.ContainsKey("LifestyleScope")) return; 
+
+                                              var lifestyleScope = context.Items["LifestyleScope"] as IDisposable;
+                                              var unitOfWork = context.Items["UnitOfWork"] as IUnitOfWork;
+
+                                              try
+                                              {
+                                                  // todo: don't complete if an error; how to check for this?
+                                                  unitOfWork.Complete();
+                                              }
+                                              finally
+                                              {
+                                                  unitOfWork.Dispose();
+                                                  lifestyleScope.Dispose();
+                                              }
+                                          };
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
