@@ -98,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\CountryModule.cs" />
     <Compile Include="Resources\Country.cs" />
+    <Compile Include="Resources\Validators\CountryValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -5,6 +5,7 @@ using DDDIntro.Persistence;
 using DDDIntro.WebAPI.Resources;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Validation;
 
 namespace DDDIntro.WebAPI.Modules
 {
@@ -38,6 +39,14 @@ namespace DDDIntro.WebAPI.Modules
             Post["/countries"] = parameters =>
                 {
                     var countryResource = this.Bind<Country>(blacklistedProperties:"id");
+
+                    var validationResult = this.Validate(countryResource);
+                    if (! validationResult.IsValid)
+                    {
+                        var response = Response.AsJson(validationResult.Errors);
+                        response.StatusCode = HttpStatusCode.BadRequest;
+                        return response;
+                    }
 
                     var country = countryFactory.CreateCountry(countryResource.Name);
                     countryRepository.Add(country);
