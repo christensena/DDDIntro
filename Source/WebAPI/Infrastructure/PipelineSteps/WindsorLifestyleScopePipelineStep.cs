@@ -14,6 +14,12 @@ namespace DDDIntro.WebAPI.Infrastructure.PipelineSteps
             pipelines.AfterRequest.AddItemToEndOfPipeline(EndScope);
         }
 
+        private static Response BeginScope(NancyContext context, IWindsorContainer container)
+        {
+            context.Items["LifestyleScope"] = container.BeginScope();
+            return null;
+        }
+
         private static void EndScope(NancyContext context)
         {
             // todo: get to the bottom of why this guard condition is needed with static resources
@@ -22,12 +28,6 @@ namespace DDDIntro.WebAPI.Infrastructure.PipelineSteps
             var lifestyleScope = context.Items["LifestyleScope"] as IDisposable;
 
             lifestyleScope.Dispose();
-        }
-
-        private static Response BeginScope(NancyContext context, IWindsorContainer container)
-        {
-            context.Items["LifestyleScope"] = container.BeginScope();
-            return null;
         }
     }
 }

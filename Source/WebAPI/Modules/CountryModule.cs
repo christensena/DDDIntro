@@ -1,4 +1,3 @@
-using System.IO;
 using System.Linq;
 using DDDIntro.Domain.Services.Factories;
 using DDDIntro.Persistence;
@@ -14,8 +13,9 @@ namespace DDDIntro.WebAPI.Modules
         // TODO: let's do content negotiation ourselves unless there is a nice
         // way to do it in Nancy like there seems to be for most things
         public CountryModule(IRepository<Domain.Country> countryRepository, CountryFactory countryFactory)
+            : base("/countries")
         {
-            Get["/countries"] = parameters =>
+            Get["/"] = parameters =>
                 {
                     var countryResources = countryRepository.FindAll()
                         .Select(c => new Country {id = c.Id.ToString(), Name = c.Name});
@@ -25,7 +25,7 @@ namespace DDDIntro.WebAPI.Modules
                     return Response.AsJson(resource);
                 };
 
-            Get["/countries/{id}"] = parameters =>
+            Get["/{id}"] = parameters =>
                 {
                     var country = countryRepository.GetById((int)parameters.id);
                     if (country == null)
@@ -36,7 +36,7 @@ namespace DDDIntro.WebAPI.Modules
                     return Response.AsJson(resource);
                 };
 
-            Post["/countries"] = parameters =>
+            Post["/"] = parameters =>
                 {
                     var countryResource = this.Bind<Country>(blacklistedProperties:"id");
 
@@ -54,7 +54,7 @@ namespace DDDIntro.WebAPI.Modules
                     return Response.AsRedirect("/countries/"+country.Id);
                 };
 
-            Put["/countries/{id}"] = parameters =>
+            Put["/{id}"] = parameters =>
                 {
                     var country = countryRepository.GetById((int) parameters.id);
                     if (country == null)
@@ -66,7 +66,7 @@ namespace DDDIntro.WebAPI.Modules
                     return Response.AsRedirect("/countries/" + country.Id);
                 };
 
-            Delete["/countries/{id}"] = parameters =>
+            Delete["/{id}"] = parameters =>
                 {
                     var country = countryRepository.GetById((int)parameters.id);
                     if (country == null)

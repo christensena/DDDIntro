@@ -19,7 +19,8 @@ namespace DDDIntro.Persistence.NHibernate.MappingOverrides
             mapping.HasMany(x => x.Teams)
                 .Access.CamelCaseField()
                 .AsList(x => x.Column("Number"))
-                .Cascade.AllDeleteOrphan();
+                .Cascade.AllDeleteOrphan()
+                .Not.LazyLoad();
 
             mapping.IgnoreProperty(x => x.Team1);
             mapping.IgnoreProperty(x => x.Team2);
