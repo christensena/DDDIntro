@@ -95,6 +95,8 @@
     <Compile Include="Infrastructure\WindsorInstaller.cs" />
     <Compile Include="Infrastructure\PipelineSteps\WindsorLifestyleScopePipelineStep.cs" />
     <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\MatchModule.cs" />
+    <Compile Include="Resources\MatchResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\CountryModule.cs" />
     <Compile Include="Resources\Country.cs" />
