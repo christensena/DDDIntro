@@ -45,7 +45,7 @@ namespace DDDIntro.Application.Services
         {
             using (var unitOfWork = unitOfWorkFactory.BeginUnitOfWork())
             {
-                var nzl = unitOfWork.FindAll<Country>().SingleOrDefault(c => c.Name == "New Zealand");
+                var nzl = unitOfWork.Query<Country>().SingleOrDefault(c => c.Name == "New Zealand");
 
                 unitOfWork.Add(new Player("Brendan", "McCullum", nzl));
                 unitOfWork.Add(new Player("Martin", "Guptil", nzl));

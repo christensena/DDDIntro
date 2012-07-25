@@ -19,7 +19,7 @@ namespace DDDIntro.IntegrationTests
         {
             using (var uow = unitOfWorkFactory.BeginUnitOfWork())
             {
-                var country = uow.FindAll<Country>().SingleOrDefault(x => x.Name == countryName);
+                var country = uow.Query<Country>().SingleOrDefault(x => x.Name == countryName);
                 if (country != null)
                     return country;
 
@@ -44,7 +44,7 @@ namespace DDDIntro.IntegrationTests
         public void PickTeam(Team team, IUniversalRepository universalRepository)
         {
             var countryName = team.Country.Name;
-            var playersForCountry = universalRepository.FindAll<Player>().Where(p => p.Country.Name.Equals(countryName));
+            var playersForCountry = universalRepository.Query<Player>().Where(p => p.Country.Name.Equals(countryName));
 
             var random = new Random();
             var availablePlayers = playersForCountry.ToList();
@@ -60,7 +60,7 @@ namespace DDDIntro.IntegrationTests
         {
             using (var uow = unitOfWorkFactory.BeginUnitOfWork())
             {
-                var country = uow.FindAll<Country>().Single(x => x.Name == countryName);
+                var country = uow.Query<Country>().Single(x => x.Name == countryName);
 
                 var player = new Player(firstName, lastName, country);
 

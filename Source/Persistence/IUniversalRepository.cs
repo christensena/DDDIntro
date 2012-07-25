@@ -12,7 +12,7 @@ namespace DDDIntro.Persistence
     {
         TEntity GetById<TEntity>(int id) where TEntity : class, IAggregateRoot;
 
-        IQueryable<TEntity> FindAll<TEntity>() where TEntity : class, IAggregateRoot;
+        IQueryable<TEntity> Query<TEntity>() where TEntity : class, IAggregateRoot;
 
         void Add<TEntity>(TEntity entity) where TEntity : class, IAggregateRoot;
 
