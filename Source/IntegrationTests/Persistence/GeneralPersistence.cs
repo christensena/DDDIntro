@@ -12,15 +12,9 @@ namespace DDDIntro.IntegrationTests.Persistence
         public void UnitOfWork_EntityAdded_CompleteNotCalled_EntityShouldNotBePersisted()
         {
             // Act
-            try
+            using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
             {
-                using (var uow = UnitOfWorkFactory.BeginUnitOfWork())
-                {
-                    uow.Add(new Country("Test"));
-                }
-            }
-            catch (Exception)
-            {
+                uow.Add(new Country("Test"));
             }
 
             // Assert
