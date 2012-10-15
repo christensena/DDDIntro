@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{610ECF8B-7876-4137-B59E-A5AA543CA3EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.TakeTwo", "WebAPI.TakeTwo\WebAPI.TakeTwo.csproj", "{7252A1B3-E54F-4190-A9A9-56B860408DA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,12 @@ Global
 		{610ECF8B-7876-4137-B59E-A5AA543CA3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{610ECF8B-7876-4137-B59E-A5AA543CA3EE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{610ECF8B-7876-4137-B59E-A5AA543CA3EE}.Release|x86.ActiveCfg = Release|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7252A1B3-E54F-4190-A9A9-56B860408DA1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

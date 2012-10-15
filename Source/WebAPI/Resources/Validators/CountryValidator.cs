@@ -20,7 +20,7 @@ namespace DDDIntro.WebAPI.Resources.Validators
         // TODO: dummed down because of issue with Nancy.FluentValidation and Nancy.Bootstrappers.Windsor
         public CountryValidator()//(IRepository<Domain.Country> repository)
         {
-            this.repository = repository;
+            //this.repository = repository;
             RuleFor(x => x.Name).NotEmpty();
 //            RuleFor(x => x.Name).Must(BeUnique).WithMessage("Name must be unique.");
         }
