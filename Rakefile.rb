@@ -16,7 +16,7 @@ end
 CLEAN.include(FileList["Source/**/#{CONFIGURATION}"])
 
 # files for a pristine working copy (or just use git clean)
-CLOBBER.include(FileList["Packages/**", "Source/**/*.user", "Source/**/*.suo", "Source/**/*.cache", "Source/_ReSharper*"])
+CLOBBER.include(FileList["Source/packages/**", "Source/**/*.user", "Source/**/*.suo", "Source/**/*.cache", "Source/_ReSharper*"])
 
 desc "Compiles solution and runs unit tests"
 task :default => [:clean, :compile, :test]
@@ -35,7 +35,7 @@ desc "Executes MSpec tests"
 mspec :mspec  do |mspec| # => [:compile]
     specs = FileList["Source/**/#{CONFIGURATION}/*Tests.dll"].exclude(/obj\//)
 
-    mspec.command = "Packages/Machine.Specifications.0.5.5.0/tools/mspec-x86-clr4.exe"
+    mspec.command = "Source/packages/Machine.Specifications.0.5.9/tools/mspec-x86-clr4.exe"
     mspec.assemblies = specs
 end
 
@@ -43,6 +43,6 @@ desc "Executes NUnit tests"
 nunit :nunit => [:compile] do |nunit| 
     tests = FileList["Source/**/#{CONFIGURATION}/*Tests.dll"].exclude(/obj\//)
 
-    nunit.command = "Packages/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe"
+    nunit.command = "Source/packages/NUnit.Runners.2.6.1/tools/nunit-console.exe"
     nunit.assemblies = tests
 end 

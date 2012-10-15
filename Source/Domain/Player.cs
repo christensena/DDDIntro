@@ -5,24 +5,37 @@ namespace DDDIntro.Domain
 {
     public class Player : EntityWithGeneratedId, IAggregateRoot
     {
-        public virtual string FirstName { get; private set; }
+        private string firstName;
+        private string lastName;
+        private Country country;
 
-        public virtual string LastName { get; private set; }
+        public virtual string FirstName
+        {
+            get { return firstName; }
+        }
 
-        public virtual Country Country { get; private set; }
+        public virtual string LastName
+        {
+            get { return lastName; }
+        }
+
+        public virtual Country Country
+        {
+            get { return country; }
+        }
 
         public Player(string firstName, string lastName, Country country)
         {
             if (country == null) throw new ArgumentNullException("country");
-            FirstName = firstName;
-            LastName = lastName;
-            Country = country;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.country = country;
         }
 
         public virtual void ChangeCountry(Country country)
         {
             if (country == null) throw new ArgumentNullException("country");
-            Country = country;
+            this.country = country;
         }
 
         // for NH rehydration only

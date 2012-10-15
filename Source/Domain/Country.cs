@@ -4,14 +4,19 @@ namespace DDDIntro.Domain
 {
     public class Country : EntityWithGeneratedId, IAggregateRoot
     {
-        public virtual string Name { get; private set; }
+        private string name;
+
+        public virtual string Name
+        {
+            get { return name; }
+        }
 
         /// <summary>
         /// Use factory to create <see cref="Country"/> instances.
         /// </summary>
         internal Country(string name)
         {
-            Name = name;
+            this.name = name;
         }
 
         // for NH rehydration only
