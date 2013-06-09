@@ -1,0 +1,3 @@
+﻿#countries .item .edit { display: none; }
+#countries .item.editing .edit { display: block; }
+#countries .item.editing .view { display: none; }

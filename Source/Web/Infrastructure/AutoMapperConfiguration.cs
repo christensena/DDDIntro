@@ -3,6 +3,10 @@ using AutoMapper;
 using DDDIntro.Domain;
 using DDDIntro.Web.ViewModels.Country;
 
+[assembly: WebActivator.PostApplicationStartMethod(
+    typeof(DDDIntro.Web.Infrastructure.AutoMapperConfiguration), 
+    "Configure")]
+
 namespace DDDIntro.Web.Infrastructure
 {
     public static class AutoMapperConfiguration
