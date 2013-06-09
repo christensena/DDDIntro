@@ -8,10 +8,18 @@ namespace DDDIntro.Domain
     public class Over : EntityWithGeneratedId
     {
         private IList<Delivery> deliveries = new List<Delivery>();
+        private TeamInnings battingTeamInnings;
+        private Player bowler;
 
-        public virtual TeamInnings BattingTeamInnings { get; private set; }
+        public virtual TeamInnings BattingTeamInnings
+        {
+            get { return battingTeamInnings; }
+        }
 
-        public virtual Player Bowler { get; private set; }
+        public virtual Player Bowler
+        {
+            get { return bowler; }
+        }
 
         public virtual IEnumerable<Delivery> Deliveries
         {
@@ -20,8 +28,8 @@ namespace DDDIntro.Domain
 
         internal Over(TeamInnings battingTeamInnings, Player bowler)
         {
-            BattingTeamInnings = battingTeamInnings;
-            Bowler = bowler;
+            this.battingTeamInnings = battingTeamInnings;
+            this.bowler = bowler;
         }
 
         public virtual bool IsOver()

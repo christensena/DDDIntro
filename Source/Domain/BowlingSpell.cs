@@ -7,9 +7,13 @@ namespace DDDIntro.Domain
 {
     public class BowlingSpell : EntityWithGeneratedId
     {
+        private Player bowler;
         private IList<Over> overs = new List<Over>();
 
-        public virtual Player Bowler { get; private set; }
+        public virtual Player Bowler
+        {
+            get { return bowler; }
+        }
 
         public virtual IEnumerable<Over> Overs
         {
@@ -18,7 +22,7 @@ namespace DDDIntro.Domain
 
         internal BowlingSpell(Player bowler)
         {
-            Bowler = bowler;
+            this.bowler = bowler;
         }
 
         // wanted to make this internal

@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DDDIntro.ComponentRegistry;
+using DDDIntro.Web.Infrastructure.Bootstrapping;
 using FluentValidation;
 
 namespace DDDIntro.Web.Infrastructure
@@ -14,6 +15,17 @@ namespace DDDIntro.Web.Infrastructure
             container.AddFacility<SqlServerPersistenceFacility>();
             container.AddFacility<DomainServicesFacility>();
             container.AddFacility<ApplicationServicesFacility>();
+
+            container.Register(
+                Classes.FromThisAssembly()
+                    .BasedOn(typeof (IBootstrapper))
+                    .WithServiceBase()
+                    .LifestyleSingleton());
+
+            // for bootstrappers
+            container.Register(
+                Component.For<WindsorControllerFactory>().ImplementedBy<WindsorControllerFactory>().LifestyleSingleton(),
+                Component.For<WindsorValidatorFactory>().ImplementedBy<WindsorValidatorFactory>().LifestyleSingleton());
 
             // register all Fluent Validators
             container.Register(

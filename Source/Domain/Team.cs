@@ -8,12 +8,24 @@ namespace DDDIntro.Domain
     public class Team : EntityWithGeneratedId
     {
         private IList<Player> members = new List<Player>();
+        private Match match;
+        private Country country;
+        private Player twelfthMan;
 
-        public virtual Match Match { get; private set; }
+        public virtual Match Match
+        {
+            get { return match; }
+        }
 
-        public virtual Country Country { get; private set; }
+        public virtual Country Country
+        {
+            get { return country; }
+        }
 
-        public virtual Player TwelfthMan { get; private set; }
+        public virtual Player TwelfthMan
+        {
+            get { return twelfthMan; }
+        }
 
         public virtual IEnumerable<Player> Members
         {
@@ -22,8 +34,8 @@ namespace DDDIntro.Domain
 
         internal Team(Match match, Country country)
         {
-            Match = match;
-            Country = country;
+            this.match = match;
+            this.country = country;
         }
 
         public virtual void AddMember(Player player)
@@ -37,7 +49,7 @@ namespace DDDIntro.Domain
             }
             else
             {
-                TwelfthMan = player;
+                twelfthMan = player;
             }
         }
 
@@ -47,7 +59,7 @@ namespace DDDIntro.Domain
 
             if (player.Equals(TwelfthMan))
             {
-                TwelfthMan = null;
+                twelfthMan = null;
             }
             else
             {

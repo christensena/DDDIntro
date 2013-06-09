@@ -10,10 +10,18 @@ namespace DDDIntro.Domain
         private IList<Over> overs = new List<Over>();
         private IList<BatterInnings> batterInnings = new List<BatterInnings>();
         private IList<BowlingSpell> bowlingSpells = new List<BowlingSpell>();
+        private Team battingTeam;
+        private Team fieldingTeam;
 
-        public virtual Team BattingTeam { get; private set; }
+        public virtual Team BattingTeam
+        {
+            get { return battingTeam; }
+        }
 
-        public virtual Team FieldingTeam { get; private set; }
+        public virtual Team FieldingTeam
+        {
+            get { return fieldingTeam; }
+        }
 
         public virtual IEnumerable<Over> Overs
         {
@@ -34,8 +42,8 @@ namespace DDDIntro.Domain
 
         internal TeamInnings(Team battingTeam, Team fieldingTeam)
         {
-            BattingTeam = battingTeam;
-            FieldingTeam = fieldingTeam;
+            this.battingTeam = battingTeam;
+            this.fieldingTeam = fieldingTeam;
         }
 
         public virtual BatterInnings CommenceBatterInnings(Player batter)

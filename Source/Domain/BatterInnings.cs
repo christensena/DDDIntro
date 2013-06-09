@@ -5,29 +5,57 @@ namespace DDDIntro.Domain
 {
     public class BatterInnings : EntityWithGeneratedId
     {
-        public virtual TeamInnings TeamInnings { get; private set; }
+        private TeamInnings teamInnings;
+        private Player batter;
+        private int ballsFaced;
+        private int runsScored;
+        private bool notOut;
+        private DateTime startTime;
+        private DateTime? endTime;
 
-        public virtual Player Batter { get; private set; }
+        public virtual TeamInnings TeamInnings
+        {
+            get { return teamInnings; }
+        }
 
-        public virtual int BallsFaced { get; private set; }
+        public virtual Player Batter
+        {
+            get { return batter; }
+        }
 
-        public virtual int RunsScored { get; private set; }
+        public virtual int BallsFaced
+        {
+            get { return ballsFaced; }
+        }
 
-        public virtual bool NotOut { get; private set; }
+        public virtual int RunsScored
+        {
+            get { return runsScored; }
+        }
 
-        public virtual DateTime StartTime { get; private set; }
+        public virtual bool NotOut
+        {
+            get { return notOut; }
+        }
 
-        public virtual DateTime? EndTime { get; private set; }
+        public virtual DateTime StartTime
+        {
+            get { return startTime; }
+        }
+
+        public virtual DateTime? EndTime
+        {
+            get { return endTime; }
+        }
 
         internal BatterInnings(TeamInnings teamInnings, Player batter)
         {
             if (teamInnings == null) throw new ArgumentNullException("teamInnings");
             if (batter == null) throw new ArgumentNullException("batter");
-
-            TeamInnings = teamInnings;
-            Batter = batter;
-            NotOut = true;
-            StartTime = DateTime.Now;
+            this.teamInnings = teamInnings;
+            this.batter = batter;
+            notOut = true;
+            startTime = DateTime.Now;
         }
 
         public virtual void BallFaced(Delivery delivery)
@@ -35,8 +63,8 @@ namespace DDDIntro.Domain
             if (delivery == null) throw new ArgumentNullException("delivery");
             if (! NotOut) throw new InvalidOperationException("Cannot face a Delivery after being dismissed!");
 
-            BallsFaced++;
-            RunsScored += delivery.RunsScored;
+            ballsFaced++;
+            runsScored += delivery.RunsScored;
         }
 
         public virtual TimeSpan GetDuration()
@@ -47,8 +75,8 @@ namespace DDDIntro.Domain
         // this is an area not started yet; will change drastically from this
         public virtual void Dismiss() // method of dismissal?
         {
-            NotOut = false;
-            EndTime = DateTime.Now;
+            notOut = false;
+            endTime = DateTime.Now;
         }
 
         // for NH rehydration

@@ -9,8 +9,12 @@ namespace DDDIntro.Domain
     {
         private IList<TeamInnings> innings = new List<TeamInnings>();
         private IList<Team> teams = new List<Team>();
+        private DateTime date;
 
-        public virtual DateTime Date { get; private set; }
+        public virtual DateTime Date
+        {
+            get { return date; }
+        }
 
         public virtual Team Team1
         {
@@ -36,7 +40,7 @@ namespace DDDIntro.Domain
             if (team2Country == null) throw new ArgumentNullException("team2Country");
             if (team1Country.Equals(team2Country)) throw new ArgumentException("Teams must not be the same country!");
 
-            var match = new Match { Date = date };
+            var match = new Match { date = date };
             match.teams.Add(new Team(match, team1Country));
             match.teams.Add(new Team(match, team2Country));
             return match;
